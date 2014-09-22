@@ -11,11 +11,19 @@ class SetUp
 	def create_instances
 	  @human_player = HumanPlayer.new
 	  @ui = UserInterface.new
-	  @board = Board.new(@ui)
 	end
 
 	def choose_board
-		
+	  @ui.prompt_for_board
+	  board_choice = @ui.get_board_choice
+
+	  if board_choice.to_i != 0
+			@board = Board.new(@ui, board_choice)
+	  else 
+	  	@ui.print_player_error
+	  	self.choose_board
+	  end
+	  @board
 	end
 
 	def choose_player

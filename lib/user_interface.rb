@@ -2,8 +2,17 @@ require_relative 'human_player.rb'
 
 class UserInterface
     
+    def prompt_for_board
+      puts "Welcome to Tic Tac Toe. Please enter a number to determine board size : ex, inputting '6' would create a 6x6 board." 
+    end
+
+    def get_board_choice
+      choice = gets.chomp
+      choice.to_i
+    end
+
     def prompt_for_player_type
-      puts "Welcome to Tic Tac Toe. Please choose your level : press e for easy and h for hard."
+      puts "Please choose your player level : press e for easy and h for hard."
     end
 
     def get_player_choice
@@ -12,9 +21,9 @@ class UserInterface
     end
 
     def print_player_error
-      puts "That's not a valid choice, please try again"
+      puts "That's not a valid choice, please try again."
     end
-    
+
     def welcome(player)
       puts "Welcome to Tic Tac Toe against #{player}. The computer will go first." 
     end
