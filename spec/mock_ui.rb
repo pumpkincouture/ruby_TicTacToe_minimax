@@ -9,9 +9,6 @@ class MockUi
 	def print_player_error
 	end
 
-	def validate_player_choice(player_choice)
-	end
-
 	def welcome(player)
 	end
 

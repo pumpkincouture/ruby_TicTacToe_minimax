@@ -15,7 +15,7 @@ class SetUp
 	end
 
 	def choose_board
-
+		
 	end
 
 	def choose_player
@@ -27,6 +27,7 @@ class SetUp
 	  elsif player_choice == "H"
 		  @player = IntelComputerPlayer.new
 		else
+			@ui.print_player_error
 			self.choose_player
 	  end
 	  @player

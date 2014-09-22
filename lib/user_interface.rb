@@ -14,17 +14,7 @@ class UserInterface
     def print_player_error
       puts "That's not a valid choice, please try again"
     end
-
-    def valid_player?(human_choice)
-      return true if human_choice == "H" || human_choice == "E"
-      false
-    end
-
-    # def validate_player_choice(player_choice)
-    #   print_player_error if player_choice != "H" || player_choice != "E"
-    #   player_choice
-    # end
-
+    
     def welcome(player)
       puts "Welcome to Tic Tac Toe against #{player}. The computer will go first." 
     end
