@@ -37,7 +37,7 @@ class UserInterface
     end
 
     def computer_choice(answer)
-      puts "Computer chose space number #{answer}."
+      puts "Computer chose space number #{answer + 1}."
     end
 
     def human_wins
@@ -56,12 +56,16 @@ class UserInterface
       puts "I'm sorry, that is not a valid move, please try again."
     end
 
-    def display_board(board)
-      puts "#{board["1"]} | #{board["2"]} | #{board["3"]}"
-      puts "---------"
-      puts "#{board["4"]} | #{board["5"]} | #{board["6"]}"
-      puts "---------"
-      puts "#{board["7"]} | #{board["8"]} | #{board["9"]}"
+    def display_board(cells)
+     p cells[1..Math.sqrt(cells.length)] * Math.sqrt(cells.length)
+     # p board[Math.sqrt(board.length) - 1..Math.sqrt(board.length) * 2 - 2]
+     # p board[Math.sqrt(board.length) - 1..Math.sqrt(board.length) * 2 - 2]
+
+      # puts "#{board["1"]} | #{board["2"]} | #{board["3"]}"
+      # puts "---------"
+      # puts "#{board["4"]} | #{board["5"]} | #{board["6"]}"
+      # puts "---------"
+      # puts "#{board["7"]} | #{board["8"]} | #{board["9"]}"
     end 
 end
 

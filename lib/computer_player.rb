@@ -1,16 +1,15 @@
-require_relative 'board.rb'
+require_relative 'board'
+require_relative 'ttt_constants'
 
 class ComputerPlayer
-    
+  include TTTConstants
+
   def possible_moves(cells)
     move = []
-    cells.each do |space|
-      move << space if space != "X" && space != "O"
+    cells.each_with_index do |subarray, idx|
+      move << idx if subarray != X_PIECE && subarray != O_PIECE
     end
-    # cells.each do |space, value|
-    # move << space if cells[space] != "X" && cells[space] != "O"
-    # end
-    # move.map!(&:to_s)
+    move
   end
 
   def comp_move(move)

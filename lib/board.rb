@@ -1,7 +1,10 @@
-require_relative 'game.rb'
-require_relative 'user_interface.rb'
+require_relative 'game'
+require_relative 'user_interface'
+require_relative 'ttt_constants'
 
 class Board
+  include TTTConstants
+
   attr_reader :error, :cells
 
   def initialize(user_interface, board_choice)
@@ -15,13 +18,15 @@ class Board
   end
 
   def valid_move(answer)
-    cells[answer] = "O"
+    cells[answer] = O_PIECE
     @ui.human_choice(answer)
     @ui.display_board(cells)
   end
 
+  def board_size
+
   def computer_move(answer)
-    cells[answer] = "X"
+    cells[answer] = X_PIECE
     @ui.computer_choice(answer)
     @ui.display_board(cells)
   end

@@ -1,9 +1,9 @@
-require_relative 'board.rb'
-require_relative 'computer_player.rb'
-require_relative 'human_player.rb'
-require_relative 'user_interface.rb'
-require_relative 'ttt_constants.rb'
-require_relative 'set_up.rb'
+require_relative 'board'
+require_relative 'computer_player'
+require_relative 'human_player'
+require_relative 'user_interface'
+require_relative 'ttt_constants'
+require_relative 'set_up'
 
 
 class Game
@@ -86,10 +86,9 @@ class Game
 
   def play!
     first_move
-    until game_over?(@board.cells)
-      play_game
-    end
-    end_game_message(winner?(computer_spaces(@board.cells), human_spaces(@board.cells)))
+    # until game_over?(@board.cells)
+    #   play_game
+    # end
+    # end_game_message(winner?(computer_spaces(@board.cells), human_spaces(@board.cells)))
   end
-
 end
