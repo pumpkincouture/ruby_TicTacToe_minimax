@@ -4,10 +4,13 @@ class ComputerPlayer
     
   def possible_moves(cells)
     move = []
-    cells.each do |space, value|
-    move << space if cells[space] != "X" && cells[space] != "O"
+    cells.each do |space|
+      move << space if space != "X" && space != "O"
     end
-    move.map!(&:to_s)
+    # cells.each do |space, value|
+    # move << space if cells[space] != "X" && cells[space] != "O"
+    # end
+    # move.map!(&:to_s)
   end
 
   def comp_move(move)

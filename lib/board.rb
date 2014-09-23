@@ -4,10 +4,10 @@ require_relative 'user_interface.rb'
 class Board
   attr_reader :error, :cells
 
-  def initialize(user_interface)
+  def initialize(user_interface, board_choice)
     @ui = user_interface
-    @cells = {"1" => "1", "2" => "2", "3" => "3", "4" => "4", "5" => "5", 
-              "6" => "6", "7" => "7", "8" => "8", "9" => "9"}
+    @board_choice = board_choice
+    @cells = Array.new(board_choice * board_choice, [])
   end
 
   def invalid_key(answer)
