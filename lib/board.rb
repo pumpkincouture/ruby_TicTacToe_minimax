@@ -14,20 +14,22 @@ class Board
   end
 
   def invalid_key(answer)
-    cells[answer] !~ /\d+/
+    answer.to_i == 0 || cells[answer.to_i - 1] == X_PIECE
   end
 
   def valid_move(answer)
-    cells[answer] = O_PIECE
+    cells[answer.to_i - 1] = O_PIECE
     @ui.human_choice(answer)
     @ui.display_board(cells)
   end
-
-  def board_size
 
   def computer_move(answer)
     cells[answer] = X_PIECE
     @ui.computer_choice(answer)
     @ui.display_board(cells)
+  end
+
+  def board_size(cells)
+   board_size = cells[1..Math.sqrt(cells.length)] * Math.sqrt(cells.length)
   end
 end

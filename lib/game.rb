@@ -9,20 +9,20 @@ require_relative 'set_up'
 class Game
   include TTTConstants
 
-  attr_reader :player, :human_player, :ui, :board
+  attr_reader :board, :player, :human_player, :ui
     
-  def initialize(player, human_player, user_interface, board)
+  def initialize(board, player, human_player, user_interface)
+    @board = board
     @player = player
     @human_player = human_player
     @ui = user_interface
-    @board = board
   end
 
   def computer_spaces(cells)
     computer_spaces = []
 
-    cells.each do |space, value|
-      computer_spaces << space if cells[space] == X_PIECE
+    cells.each_with_index do |sub_array, idx|
+      computer_spaces << idx if sub_array == X_PIECE
     end
     computer_spaces
   end
@@ -30,13 +30,14 @@ class Game
   def human_spaces(cells)
     human_spaces = []
 
-    cells.each do |space, value|
-      human_spaces << space if cells[space] == O_PIECE
+    cells.each_with_index do |sub_array, idx|
+      human_spaces << idx if sub_array == O_PIECE
     end
     human_spaces
   end
 
   def winner?(computer_spaces, human_spaces)
+    #needs refactoring- relies on a fixed set of winning combinations
 
     computer_spaces.map!(&:to_i)
     human_spaces.map!(&:to_i) 
@@ -52,15 +53,15 @@ class Game
   end
 
   def end_game_message(winning_player)
-    @ui.computer_wins if winning_player == "computer"
-    @ui.human_wins if winning_player == "human" 
-    @ui.cats_game if winning_player == false
+    ui.computer_wins if winning_player == "computer"
+    ui.human_wins if winning_player == "human" 
+    ui.cats_game if winning_player == false
   end
 
   def open_spaces(cells)
     spaces = []
-    cells.each do |space, value|
-    spaces << space if cells[space] != X_PIECE && cells[space] != O_PIECE
+    cells.each_with_index do |sub_array, idx|
+    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
     end
     spaces
   end
@@ -70,8 +71,8 @@ class Game
   end
 
   def first_move
-    @ui.welcome(@player)
-    @board.computer_move(@player.comp_move(@player.possible_moves(@board.cells)))
+    ui.welcome(player)
+    board.computer_move(player.comp_move(player.possible_moves(board.cells)))
   end
 
   def play_game
@@ -86,9 +87,9 @@ class Game
 
   def play!
     first_move
-    # until game_over?(@board.cells)
-    #   play_game
-    # end
-    # end_game_message(winner?(computer_spaces(@board.cells), human_spaces(@board.cells)))
+    until game_over?(board.cells)
+      play_game
+    end
+    end_game_message(winner?(computer_spaces(@board.cells), human_spaces(@board.cells)))
   end
 end
