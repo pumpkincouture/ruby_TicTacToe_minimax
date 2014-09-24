@@ -5,7 +5,7 @@ require_relative 'ttt_constants'
 class Board
   include TTTConstants
 
-  attr_reader :error, :cells
+  attr_reader :cells
 
   def initialize(user_interface, board_choice)
     @ui = user_interface
