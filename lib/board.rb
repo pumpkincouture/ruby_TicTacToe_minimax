@@ -11,10 +11,12 @@ class Board
     @ui = user_interface
     @board_choice = board_choice
     @cells = Array.new(board_choice * board_choice, [])
+    # @computer_score = Array.new(board_choice * board_choice, X_PIECE)
+    # @human_score = Array.new(board_choice * board_choice, O_PIECE)
   end
 
   def invalid_key(answer)
-    answer.to_i == 0 || cells[answer.to_i - 1] == X_PIECE
+    answer.to_i == 0 || cells[answer.to_i - 1] == X_PIECE || cells[answer.to_i - 1] == O_PIECE
   end
 
   def valid_move(answer)

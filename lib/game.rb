@@ -39,17 +39,23 @@ class Game
   def winner?(computer_spaces, human_spaces)
     #needs refactoring- relies on a fixed set of winning combinations
 
-    computer_spaces.map!(&:to_i)
-    human_spaces.map!(&:to_i) 
+    # computer_spaces.map!(&:to_i)
+    # human_spaces.map!(&:to_i) 
+    p computer_spaces
+    p human_spaces
 
-    WINNING_COMBOS.each do |sub_array|
-      if sub_array.all? {|x|computer_spaces.include?(x)}
-        return "computer"
-      elsif sub_array.all? {|y|human_spaces.include?(y)}
-        return "human"
-      end
-    end
-    return false
+    winning_count = 0
+
+    p diagonal_1 = (0..Math.sqrt(board.cells.length)).collect {|array| array}
+
+    # WINNING_COMBOS.each do |sub_array|
+    #   if sub_array.all? {|x|computer_spaces.include?(x)}
+    #     return "computer"
+    #   elsif sub_array.all? {|y|human_spaces.include?(y)}
+    #     return "human"
+    #   end
+    # end
+    # return false
   end
 
   def end_game_message(winning_player)
@@ -76,12 +82,12 @@ class Game
   end
 
   def play_game
-    @human_player.user_turn(@ui)
-    if @board.invalid_key(@human_player.answer)
-      @ui.user_error
+    human_player.user_turn(ui)
+    if board.invalid_key(human_player.answer)
+      ui.user_error
     else
-      @board.valid_move(@human_player.answer)
-      @board.computer_move(@player.comp_move(@player.possible_moves(@board.cells))) 
+      board.valid_move(human_player.answer)
+      board.computer_move(player.comp_move(player.possible_moves(board.cells))) 
     end
   end
 
@@ -90,6 +96,6 @@ class Game
     until game_over?(board.cells)
       play_game
     end
-    end_game_message(winner?(computer_spaces(@board.cells), human_spaces(@board.cells)))
+    end_game_message(winner?(computer_spaces(board.cells), human_spaces(board.cells)))
   end
 end
