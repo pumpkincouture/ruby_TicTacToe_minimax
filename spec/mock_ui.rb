@@ -1,5 +1,11 @@
 class MockUi
 
+	def prompt_for_board
+	end
+
+	def get_board_choice
+	end
+	
 	def prompt_for_player_type
 	end
 
@@ -7,9 +13,6 @@ class MockUi
 	end
 
 	def print_player_error
-	end
-
-	def validate_player_choice(player_choice)
 	end
 
 	def welcome(player)

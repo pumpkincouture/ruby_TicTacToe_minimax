@@ -1,4 +1,4 @@
-require_relative 'user_interface.rb'
+require_relative 'user_interface'
 
 class HumanPlayer
   

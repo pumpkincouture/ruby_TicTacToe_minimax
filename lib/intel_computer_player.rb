@@ -12,6 +12,30 @@ class IntelComputerPlayer
                            [1,5,9], [3,5,7]]
   end
 
+  def possible_moves(cells)
+    to_win = win_move(cells)
+    block = to_block?(cells)
+    random = moves_left(cells)
+
+    to_win.map!(&:to_s)
+
+    if to_win.empty?
+      random
+    elsif to_win.include? "5"
+      "5"
+    elsif block
+      block
+    else to_win
+      to_win
+    end
+  end
+
+  def comp_move(move)
+    move[-1]
+  end
+
+  private 
+
   def comp_location(cells)
     computer_spaces = []
 
@@ -157,7 +181,6 @@ class IntelComputerPlayer
   end
 
   def moves_left(cells)
-
     move = []
 
     cells.each do |space, value|

@@ -1,9 +1,18 @@
-require_relative 'human_player.rb'
+require_relative 'human_player'
 
 class UserInterface
     
+    def prompt_for_board
+      puts "Welcome to Tic Tac Toe. Please enter a number to determine board size : ex, inputting '6' would create a 6x6 board." 
+    end
+
+    def get_board_choice
+      choice = gets.chomp
+      choice.to_i
+    end
+
     def prompt_for_player_type
-      puts "Welcome to Tic Tac Toe. Please choose your level : press e for easy and h for hard."
+      puts "Please choose your player level : press e for easy and h for hard."
     end
 
     def get_player_choice
@@ -12,18 +21,8 @@ class UserInterface
     end
 
     def print_player_error
-      puts "That's not a valid choice, please try again"
+      puts "That's not a valid choice, please try again."
     end
-
-    def valid_player?(human_choice)
-      return true if human_choice == "H" || human_choice == "E"
-      false
-    end
-
-    # def validate_player_choice(player_choice)
-    #   print_player_error if player_choice != "H" || player_choice != "E"
-    #   player_choice
-    # end
 
     def welcome(player)
       puts "Welcome to Tic Tac Toe against #{player}. The computer will go first." 
@@ -38,7 +37,7 @@ class UserInterface
     end
 
     def computer_choice(answer)
-      puts "Computer chose space number #{answer}."
+      puts "Computer chose space number #{answer + 1}."
     end
 
     def human_wins
@@ -57,12 +56,8 @@ class UserInterface
       puts "I'm sorry, that is not a valid move, please try again."
     end
 
-    def display_board(board)
-      puts "#{board["1"]} | #{board["2"]} | #{board["3"]}"
-      puts "---------"
-      puts "#{board["4"]} | #{board["5"]} | #{board["6"]}"
-      puts "---------"
-      puts "#{board["7"]} | #{board["8"]} | #{board["9"]}"
+    def display_board(cells)
+      p cells
     end 
 end
 
