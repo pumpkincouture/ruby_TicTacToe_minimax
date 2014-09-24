@@ -5,10 +5,10 @@ require'../lib/human_player.rb'
 require '../lib/user_interface.rb'
 require '../lib/set_up.rb'
 require '../lib/intel_computer_player.rb'
-require_relative 'mock_ui.rb'
-require_relative 'mock_human.rb'
-require_relative 'mock_board.rb'
-require_relative 'mock_player.rb'
+require_relative 'mock_ui'
+require_relative 'mock_human'
+require_relative 'mock_board'
+require_relative 'mock_player'
 
 RSpec.configure do |config|
   config.failure_color = :red

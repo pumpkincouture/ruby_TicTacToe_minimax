@@ -1,9 +1,9 @@
-require_relative 'user_interface.rb'
-require_relative 'board.rb'
-require_relative 'human_player.rb'
-require_relative 'game.rb'
-require_relative 'intel_computer_player.rb'
-require_relative 'computer_player.rb'
+require_relative 'user_interface'
+require_relative 'board'
+require_relative 'human_player'
+require_relative 'game'
+require_relative 'intel_computer_player'
+require_relative 'computer_player'
 
 class SetUp
 	attr_reader :player, :human_player, :ui, :board

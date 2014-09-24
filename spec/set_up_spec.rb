@@ -19,16 +19,7 @@ describe SetUp do
 		expect(@setup.board).to eq(@setup.board)
 	end
 
-	xit "returns Computer Player instance" do
-		player_choice = @ui.get_player_choice
-		human_choice = @ui.validate_player_choice(player_choice)
-		expect(@setup.choose_player).to eq("E")
-	end
-
-	it "returns Intel Computer Player instance" do
-		player_choice = "H"
-		human_choice = @ui.validate_player_choice(player_choice)
-		
-		expect(@setup.choose_player).to eq(@setup.player)
+	it "creates Player instance" do
+		expect(@setup.player).to eq(@setup.player)
 	end
 end

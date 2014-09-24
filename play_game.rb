@@ -10,12 +10,6 @@ setup = SetUp.new
 
 setup.create_instances
 
-setup.choose_board
-
-setup.choose_player
-
-new_game = Game.new(setup.player, setup.human_player, setup.ui, setup.board)
-
-# p new_game.board
+new_game = Game.new(setup.choose_board, setup.choose_player, setup.human_player, setup.ui)
 
 new_game.play!
