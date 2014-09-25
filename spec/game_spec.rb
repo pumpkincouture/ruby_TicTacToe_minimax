@@ -14,21 +14,9 @@ describe Game do
 		@new_game = Game.new(@player, @human_player, @user_interface, @board)
 	end
 
-	it "returns computer's current spaces" do
-	  expect(@new_game.computer_spaces(cells)).to eq(computer_spaces)
-	end
-
-	it "returns human user's current spaces" do
-		expect(@new_game.human_spaces(cells)).to eq(human_spaces)
-	end
-
 	xit "returns a winner" do
 		string = "computer"
 	  expect(@new_game.winner?(computer_spaces, human_spaces)).to eq(string)
-	end
-
-	xit "returns open spaces" do
-	  expect(@new_game.open_spaces(cells)).to eq(open_spaces)
 	end
 
 	xit "returns winner" do

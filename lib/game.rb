@@ -18,51 +18,9 @@ class Game
     @ui = user_interface
   end
 
-  def computer_spaces(cells)
-    computer_spaces = []
+  def winner?(cells)
+    
 
-    cells.each_with_index do |sub_array, idx|
-      computer_spaces << idx if sub_array == X_PIECE
-    end
-    computer_spaces
-  end
-
-  def human_spaces(cells)
-    human_spaces = []
-
-    cells.each_with_index do |sub_array, idx|
-      human_spaces << idx if sub_array == O_PIECE
-    end
-    human_spaces
-  end
-
-  def winner?(computer_spaces, human_spaces, cells)
-    #needs refactoring- relies on a fixed set of winning combinations
-
-    # computer_spaces.map!(&:to_i)
-    # human_spaces.map!(&:to_i) 
-    # p computer_spaces
-    # p human_spaces
-
-    winning_count = 0
-    p cells
-    p board.get_board_size
-    p board.get_left_diagonal(cells)
-    p board.get_right_diagonal(cells)
-    p board.get_board_row(cells)
-    p board.get_board_column(board.get_board_row(cells))
-
-    # p diagonal_2 = (0..Math.sqrt(cells.length)).collect {|array| cells.reverse[array] }
-
-
-    # WINNING_COMBOS.each do |sub_array|
-    #   if sub_array.all? {|x|computer_spaces.include?(x)}
-    #     return "computer"
-    #   elsif sub_array.all? {|y|human_spaces.include?(y)}
-    #     return "human"
-    #   end
-    # end
-    # return false
   end
 
   def end_game_message(winning_player)
@@ -72,7 +30,7 @@ class Game
   end
 
   def game_over?(cells)
-    winner?(computer_spaces(cells), human_spaces(cells), cells) || board.open_spaces(cells).length <= 0 
+    winner?(cells) || board.open_spaces(cells).length <= 0 
   end
 
   def first_move
@@ -95,6 +53,6 @@ class Game
     until game_over?(board.cells)
       play_game
     end
-    end_game_message(winner?(computer_spaces(board.cells), human_spaces(board.cells), board.cells))
+    end_game_message(winner?(board.cells))
   end
 end
