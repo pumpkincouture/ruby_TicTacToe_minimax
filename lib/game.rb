@@ -36,17 +36,24 @@ class Game
     human_spaces
   end
 
-  def winner?(computer_spaces, human_spaces)
+  def winner?(computer_spaces, human_spaces, cells)
     #needs refactoring- relies on a fixed set of winning combinations
 
     # computer_spaces.map!(&:to_i)
     # human_spaces.map!(&:to_i) 
-    p computer_spaces
-    p human_spaces
+    # p computer_spaces
+    # p human_spaces
 
     winning_count = 0
+    p cells
+    p board.get_board_size
+    p board.get_left_diagonal(cells)
+    p board.get_right_diagonal(cells)
+    p board.get_board_row(cells)
+    p board.get_board_column(board.get_board_row(cells))
 
-    p diagonal_1 = (0..Math.sqrt(board.cells.length)).collect {|array| array}
+    # p diagonal_2 = (0..Math.sqrt(cells.length)).collect {|array| cells.reverse[array] }
+
 
     # WINNING_COMBOS.each do |sub_array|
     #   if sub_array.all? {|x|computer_spaces.include?(x)}
@@ -64,16 +71,8 @@ class Game
     ui.cats_game if winning_player == false
   end
 
-  def open_spaces(cells)
-    spaces = []
-    cells.each_with_index do |sub_array, idx|
-    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
-    end
-    spaces
-  end
-
   def game_over?(cells)
-    winner?(computer_spaces(cells), human_spaces(cells)) || open_spaces(cells).length <= 0 
+    winner?(computer_spaces(cells), human_spaces(cells), cells) || board.open_spaces(cells).length <= 0 
   end
 
   def first_move
@@ -96,6 +95,6 @@ class Game
     until game_over?(board.cells)
       play_game
     end
-    end_game_message(winner?(computer_spaces(board.cells), human_spaces(board.cells)))
+    end_game_message(winner?(computer_spaces(board.cells), human_spaces(board.cells), board.cells))
   end
 end

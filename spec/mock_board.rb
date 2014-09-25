@@ -12,6 +12,15 @@ class MockBoard
 	def computer_move(answer)
 	end
 
+	def open_spaces
+	end
+
+	def board_size
+	end
+
 	def cells
+	end
+
+	def board_choice
 	end
 end
