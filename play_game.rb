@@ -1,4 +1,5 @@
-require './lib/game'
+require './lib/game_status'
+require './lib/game_runner'
 require './lib/board'
 require './lib/computer_player'
 require './lib/human_player'
@@ -10,6 +11,6 @@ setup = SetUp.new
 
 setup.create_instances
 
-new_game = Game.new(setup.choose_board, setup.choose_player, setup.human_player, setup.ui)
+new_game = GameRunner.new(setup.choose_board, setup.choose_player, setup.human_player, setup.ui)
 
 new_game.play!

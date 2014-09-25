@@ -1,7 +1,6 @@
 require_relative 'user_interface'
 require_relative 'board'
 require_relative 'human_player'
-require_relative 'game'
 require_relative 'intel_computer_player'
 require_relative 'computer_player'
 

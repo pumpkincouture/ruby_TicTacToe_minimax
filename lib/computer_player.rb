@@ -1,4 +1,3 @@
-require_relative 'board'
 require_relative 'ttt_constants'
 
 class ComputerPlayer

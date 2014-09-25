@@ -1,5 +1,3 @@
-require_relative 'human_player'
-
 class UserInterface
     
     def prompt_for_board

@@ -2,8 +2,6 @@ require_relative 'spec_helper.rb'
 
 describe Game do
 	let(:cells) { ["X", "X", "X", "O", "O", "O", [], [], []] }
-	let(:computer_spaces) { [0, 1, 2] }
-	let(:human_spaces) { [3, 4, 5] }
 	let(:open_spaces) { [6, 7, 8] }
 
 	before :each do
@@ -11,12 +9,12 @@ describe Game do
 		@human_player = MockHuman.new
 		@board = MockBoard.new(@user_interface, )
 		@player = MockPlayer.new
-		@new_game = Game.new(@player, @human_player, @user_interface, @board)
+		@new_game = GameStatus.new(@player, @human_player, @user_interface, @board)
 	end
 
 	xit "returns a winner" do
 		string = "computer"
-	  expect(@new_game.winner?(computer_spaces, human_spaces)).to eq(string)
+	  expect(@new_game.winner?).to be true
 	end
 
 	xit "returns winner" do
