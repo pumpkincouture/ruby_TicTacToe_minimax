@@ -31,7 +31,7 @@ class Board
     open_spaces.length <= 0
   end
 
-  def open_spaces(cells)
+  def open_spaces
     spaces = []
     cells.each_with_index do |sub_array, idx|
     spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
@@ -39,21 +39,39 @@ class Board
     spaces
   end
 
-  
+  def check_matrix
+    if get_left_diagonal.count(O_PIECE || X_PIECE) == get_board_size
+      return true
+    elsif get_right_diagonal.count(O_PIECE || X_PIECE) == get_board_size
+      return true
+    elsif get_board_row.count(O_PIECE || X_PIECE) == get_board_size
+      return true
+    elsif get_board_column(get_board_row).count(O_PIECE || X_PIECE) == get_board_size
+      return true
+    else
+      return false
+    end
+  end
 
   def get_board_size
     Math.sqrt(cells.length)
   end
 
-  def get_left_diagonal(cells)
-    (0..get_board_size - 1).collect {|array| cells[array]}
+  def get_left_diagonal
+    (0..get_board_size - 1).collect {|array| get_board_row[array][array]}
   end
 
-  def get_right_diagonal(cells)
-    (0..get_board_size - 1).collect {|array| cells.reverse[array]}
+  def get_right_diagonal
+    row = -1
+    diagonals = []
+    (0..get_board_size - 1).each do |array|
+      diagonals << get_board_row[array][row]
+      row -= 1
+    end
+    diagonals
   end
 
-  def get_board_row(cells)
+  def get_board_row
     get_row = cells.each_slice(get_board_size).to_a
   end
 

@@ -5,8 +5,7 @@ describe Board do
   let (:human_answer) { "6" }
   let (:invalid_answer) { " " }
   let (:board_choice) { 3 }
-  let (:cells) { [[], "X", "O", [], [], [], "X", "O", []] }
-
+  
   before :each do
   	@ui = MockUi.new
     @board = Board.new(@ui, board_choice )
