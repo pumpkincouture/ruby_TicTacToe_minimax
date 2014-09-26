@@ -1,12 +1,12 @@
 class GameStatus
 
- def winner?(cells)
-
-
+ def winner?(board)
+	  board.check_matrix
   end
 
   def game_over?(board)
-    winner?(board.cells) || board.draw?(board.open_spaces(board.cells))
+    p winner?(board)
+    # board.draw?(board.open_spaces)
   end
 end
 

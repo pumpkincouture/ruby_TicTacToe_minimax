@@ -5,8 +5,7 @@ describe Board do
   let (:human_answer) { "6" }
   let (:invalid_answer) { " " }
   let (:board_choice) { 3 }
-  let (:cells) { [[], "X", "O", [], [], [], [], "O", []] }
-
+  
   before :each do
   	@ui = MockUi.new
     @board = Board.new(@ui, board_choice )
@@ -43,8 +42,8 @@ describe Board do
 	end
 
 	it "finds open spaces" do
-		cells_example = [ [], "X", [], [], [], [], [], [], [], [] ]
-		expect(@board.open_spaces(cells_example)).to eq([0, 2, 3, 4, 5, 6, 7, 8, 9])
+		@board.cells = [ [], "X", [], [], [], [], [], [], [], [] ]
+		expect(@board.open_spaces).to eq([0, 2, 3, 4, 5, 6, 7, 8, 9])
 	end
 
 	it "finds board size" do
@@ -52,19 +51,23 @@ describe Board do
 	end
 
 	it "finds left diagonal" do
-		expect(@board.get_left_diagonal(cells)).to eq( [[], "X", "O"] )
+		@board.cells = [[], "X", "O", [], [], [], "X", "O", []]
+		expect(@board.get_left_diagonal).to eq( [[], [], []] )
 	end
 
 	it "finds right diagonal" do
-		expect(@board.get_right_diagonal(cells)).to eq( [[], "O", []] )
+		@board.cells = [[], "X", "O", [], [], [], "X", "O", []]
+		expect(@board.get_right_diagonal).to eq( ["O", [], "X"] )
 	end
 
 	it "finds row" do
-		expect(@board.get_board_row(cells)).to eq( [[[], "X", "O"], [[], [], []], [[], "O", []]] )
+		@board.cells = [[], "X", "O", [], [], [], "X", "O", []]
+		expect(@board.get_board_row).to eq( [[[], "X", "O"], [[], [], []], ["X", "O", []]] )
 	end
 
 	it "finds columns" do
-		expect(@board.get_board_column(@board.get_board_row(cells))).to eq( [[[], [], []], ["X", [], "O"], ["O", [], []]] )
+		@board.cells = [[], "X", "O", [], [], [], "X", "O", []]
+		expect(@board.get_board_column(@board.get_board_row)).to eq( [[[], [], "X"], ["X", [], "O"], ["O", [], []]] )
 	end
 
 end
