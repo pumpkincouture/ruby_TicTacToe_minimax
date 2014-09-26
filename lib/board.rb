@@ -39,6 +39,8 @@ class Board
     spaces
   end
 
+  
+
   def get_board_size
     Math.sqrt(cells.length)
   end

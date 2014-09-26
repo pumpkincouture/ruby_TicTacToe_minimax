@@ -1,7 +1,7 @@
 class GameStatus
 
  def winner?(cells)
-
+	  
 
   end
 
