@@ -12,6 +12,6 @@ class ComputerPlayer
   end
 
   def comp_move(move)
-    move[-1]
+    move[ rand(move.length) ]
   end 
 end

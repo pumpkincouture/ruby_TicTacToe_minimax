@@ -27,6 +27,10 @@ class Board
     @ui.display_board(cells)
   end
 
+  def draw?(open_spaces)
+    open_spaces.length <= 0
+  end
+
   def open_spaces(cells)
     spaces = []
     cells.each_with_index do |sub_array, idx|

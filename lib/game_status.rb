@@ -6,7 +6,7 @@ class GameStatus
   end
 
   def game_over?(board)
-    winner?(cells) || board.open_spaces(board.cells).length <= 0 
+    winner?(board.cells) || board.draw?(board.open_spaces(board.cells))
   end
 end
 
