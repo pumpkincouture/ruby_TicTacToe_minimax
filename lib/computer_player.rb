@@ -1,4 +1,3 @@
-require_relative 'board'
 require_relative 'ttt_constants'
 
 class ComputerPlayer
@@ -13,6 +12,6 @@ class ComputerPlayer
   end
 
   def comp_move(move)
-    move[-1]
+    move[ rand(move.length) ]
   end 
 end

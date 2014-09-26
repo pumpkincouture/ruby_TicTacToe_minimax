@@ -1,8 +1,5 @@
 class MockBoard
 
-	def initialize(ui)
-	end
-
 	def invalid_key(answer)
 	end
 

@@ -1,5 +1,3 @@
-require_relative 'game'
-require_relative 'user_interface'
 require_relative 'ttt_constants'
 
 class Board
@@ -27,6 +25,10 @@ class Board
     cells[answer] = X_PIECE
     @ui.computer_choice(answer)
     @ui.display_board(cells)
+  end
+
+  def draw?(open_spaces)
+    open_spaces.length <= 0
   end
 
   def open_spaces(cells)
