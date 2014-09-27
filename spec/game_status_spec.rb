@@ -5,13 +5,8 @@ describe GameStatus do
 	let(:open_spaces) { [6, 7, 8] }
 
 	before :each do
-		@board = MockBoard.new
+		@game_runner = MockGameRunner.new(@board = MockBoard.new)
 		@game_status = GameStatus.new
-	end
-
-	xit "returns a winner" do
-		string = "computer"
-	  expect(@new_game.winner?).to be true
 	end
 
 	xit "returns winner" do

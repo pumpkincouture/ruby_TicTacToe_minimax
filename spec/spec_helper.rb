@@ -10,6 +10,7 @@ require_relative 'mock_ui'
 require_relative 'mock_human'
 require_relative 'mock_board'
 require_relative 'mock_player'
+require_relative 'mock_game_runner'
 
 RSpec.configure do |config|
   config.failure_color = :red

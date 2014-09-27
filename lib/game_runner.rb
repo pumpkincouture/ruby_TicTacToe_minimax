@@ -17,7 +17,8 @@ class GameRunner
     until game_status.game_over?(board)
       play_game
     end
-    end_game_message(game_status.winner?(board.cells))
+    p end_game_message(game_status.winner?(board))
+    # end_game_message(game_status.winner?(board.cells))
   end
 
   def first_move
