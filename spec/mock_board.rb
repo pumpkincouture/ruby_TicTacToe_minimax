@@ -1,5 +1,8 @@
 class MockBoard
 
+	def initialize
+	end
+
 	def invalid_key(answer)
 	end
 
@@ -9,27 +12,13 @@ class MockBoard
 	def computer_move(answer)
 	end
 
-	def open_spaces
+	def board_full?
 	end
 
 	def get_board_size
 	end
 
-	def get_left_diagonal(cells)
+	def check_matrix
 	end
 
-	def get_right_diagonal(cells)
-	end
-
-	def get_board_row(cells)
-	end
-
-	def get_board_column(row)
-	end
-
-	def cells
-	end
-
-	def board_choice
-	end
 end

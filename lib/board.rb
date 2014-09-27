@@ -3,7 +3,7 @@ require_relative 'ttt_constants'
 class Board
   include TTTConstants
 
-  attr_reader :cells
+  attr_accessor :cells
 
   def initialize(user_interface, board_choice)
     @ui = user_interface
@@ -27,34 +27,43 @@ class Board
     @ui.display_board(cells)
   end
 
-  def draw?(open_spaces)
+  def board_full?
     open_spaces.length <= 0
-  end
-
-  def open_spaces
-    spaces = []
-    cells.each_with_index do |sub_array, idx|
-    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
-    end
-    spaces
-  end
-
-  def check_matrix
-    if get_left_diagonal.count(O_PIECE || X_PIECE) == get_board_size
-      return true
-    elsif get_right_diagonal.count(O_PIECE || X_PIECE) == get_board_size
-      return true
-    elsif get_board_row.count(O_PIECE || X_PIECE) == get_board_size
-      return true
-    elsif get_board_column(get_board_row).count(O_PIECE || X_PIECE) == get_board_size
-      return true
-    else
-      return false
-    end
   end
 
   def get_board_size
     Math.sqrt(cells.length)
+  end
+
+  def check_matrix
+    return true if check_left_diagonal || check_right_diagonal || check_rows || check_columns
+    false
+  end
+
+  private
+
+  def check_left_diagonal
+    return true if get_left_diagonal.count(O_PIECE) == get_board_size || get_left_diagonal.count(X_PIECE) == get_board_size
+    false
+  end
+
+  def check_right_diagonal
+    return true if get_right_diagonal.count(O_PIECE) == get_board_size || get_right_diagonal.count(X_PIECE) == get_board_size 
+    false
+  end
+
+  def check_rows
+    get_board_row.each do |array|
+      return true if array.count(O_PIECE) == get_board_size || array.count(X_PIECE) == get_board_size
+    end
+    false
+  end
+
+  def check_columns
+    get_board_column(get_board_row).each do |array| 
+      return true if array.count(O_PIECE) == get_board_size || array.count(X_PIECE) == get_board_size
+    end
+    false
   end
 
   def get_left_diagonal
@@ -77,5 +86,13 @@ class Board
 
   def get_board_column(rows)
     rows.transpose
+  end
+
+  def open_spaces
+    spaces = []
+    cells.each_with_index do |sub_array, idx|
+    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
+    end
+    spaces
   end
 end

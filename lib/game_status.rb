@@ -4,9 +4,12 @@ class GameStatus
 	  board.check_matrix
   end
 
+  def draw?(board)
+  	board.board_full?
+  end
+
   def game_over?(board)
-    p winner?(board)
-    # board.draw?(board.open_spaces)
+   winner?(board) || draw?(board)
   end
 end
 
