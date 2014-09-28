@@ -35,13 +35,28 @@ class Board
     Math.sqrt(cells.length)
   end
 
-  def check_matrix
-    # return true if check_columnns.is_a? String
-      if check_columns.is_a? String  
-         
-        check_left_diagonal.is_a? String
-    # return true if check_left_diagonal.is_a? String || check_right_diagonal.is_a? String || check_rows.is_a? String || check_columns.is_a? String
+  def matrix_string?(matrix)
+    return true if matrix.is_a? String
     false
+  end
+
+  def get_winning_player(matrix)
+    return matrix if matrix != false
+    false
+  end
+
+  def check_matrix
+    if check_columns.is_a? String  
+      return check_columns
+    elsif check_right_diagonal.is_a? String
+      return check_right_diagonal
+    elsif check_left_diagonal.is_a? String
+      return check_left_diagonal
+    elsif check_rows.is_a? String
+      return check_rows
+    else
+      return false
+    end 
   end
 
   private
@@ -82,7 +97,7 @@ class Board
     get_board_column(get_board_row).each do |array| 
       if array.count(O_PIECE) == get_board_size
         return O_PIECE
-      elsif array.count(X_PIECE == get_board_size)
+      elsif array.count(X_PIECE) == get_board_size
         return X_PIECE
       else
         return false
