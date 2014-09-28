@@ -8,6 +8,10 @@ class GameStatus
   	board.board_full?
   end
 
+  def winning_player(board)
+  	
+  end
+
   def game_over?(board)
    winner?(board) || draw?(board)
   end

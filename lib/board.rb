@@ -36,34 +36,58 @@ class Board
   end
 
   def check_matrix
-    return true if check_left_diagonal || check_right_diagonal || check_rows || check_columns
+    # return true if check_columnns.is_a? String
+      if check_columns.is_a? String  
+         
+        check_left_diagonal.is_a? String
+    # return true if check_left_diagonal.is_a? String || check_right_diagonal.is_a? String || check_rows.is_a? String || check_columns.is_a? String
     false
   end
 
   private
 
   def check_left_diagonal
-    return true if get_left_diagonal.count(O_PIECE) == get_board_size || get_left_diagonal.count(X_PIECE) == get_board_size
-    false
+    if get_left_diagonal.count(O_PIECE) == get_board_size 
+      return O_PIECE
+    elsif get_left_diagonal.count(X_PIECE) == get_board_size
+       return X_PIECE
+    else
+      return false
+    end
   end
 
   def check_right_diagonal
-    return true if get_right_diagonal.count(O_PIECE) == get_board_size || get_right_diagonal.count(X_PIECE) == get_board_size 
-    false
+    if get_right_diagonal.count(O_PIECE) == get_board_size 
+      return O_PIECE
+    elsif get_right_diagonal.count(X_PIECE) == get_board_size 
+       return X_PIECE    
+    else
+      return false
+    end
   end
 
   def check_rows
     get_board_row.each do |array|
-      return true if array.count(O_PIECE) == get_board_size || array.count(X_PIECE) == get_board_size
+      if array.count(O_PIECE) == get_board_size
+        return O_PIECE
+      elsif array.count(X_PIECE) == get_board_size
+        return X_PIECE
+      else
+        return false
+      end
     end
-    false
   end
 
   def check_columns
     get_board_column(get_board_row).each do |array| 
-      return true if array.count(O_PIECE) == get_board_size || array.count(X_PIECE) == get_board_size
+      if array.count(O_PIECE) == get_board_size
+        return O_PIECE
+      elsif array.count(X_PIECE == get_board_size)
+        return X_PIECE
+      else
+        return false
+      end
     end
-    false
   end
 
   def get_left_diagonal

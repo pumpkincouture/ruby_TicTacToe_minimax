@@ -46,5 +46,11 @@ describe Board do
 		@board.cells = ["O", "X", "X", "O", "X", [], "O", "O", []]
 		expect(@board.check_matrix).to be true
 	end
+
+	it "checks columns" do
+		@board.cells = ["O", "X", "X", "O", "X", [], "O", "O", []]
+		expect(@board.check_columns).to eq("O")
+	end
+
 end
 
