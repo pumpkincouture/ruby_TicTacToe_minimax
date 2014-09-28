@@ -42,9 +42,14 @@ describe Board do
 		expect(@board.get_board_size).to eq(3.0)
 	end
 
-	it "checks the matrix for a win" do
-		@board.cells = ["O", "X", "X", "O", "X", [], "O", "O", []]
-		expect(@board.check_matrix).to be true
+	it "returns boolean" do
+		matrix = "X"
+		expect(@board.matrix_string?(matrix)).to be true
+	end
+
+	it "gets winning player string" do
+		matrix = "O"
+		expect(@board.get_winning_player(matrix)).to eq("O")
 	end
 end
 
