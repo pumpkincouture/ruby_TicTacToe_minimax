@@ -41,7 +41,7 @@ class Board
   end
 
   def get_winning_player(matrix)
-    return matrix if matrix != false
+    return matrix if matrix.is_a? String
     false
   end
 
