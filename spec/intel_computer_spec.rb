@@ -4,17 +4,18 @@ describe IntelComputerPlayer do
 
 	before :each do
 	  @ai = IntelComputerPlayer.new
+	  @player = MockPlayer.new
 	end
 
-	it "returns a random board move" do
-		cells = ["X", "O", [], [], [], [], [], [], []]
-		expect(@ai.return_move(cells)).not_to be_empty
+	it "represents smallest recursive case" do
+		expect(@ai.call_back(5)).to eq(0)
 	end
 
-	it "assign score to moves" do
-		cells = ["X", "O", [], "X", "X", "O", "O", [], []]
-		expect(@ai.assign_score(cells)).to eq(10)
+	it "represents a larger recursive case" do
+		cells = ["X", "X", "O", "X", "O", "O", [], "O", []]
+		depth = 0
+		expect(@ai.minimax_call_back(depth, @player, cells)).to eq([6,8])
+		
 	end
-
  
 end
