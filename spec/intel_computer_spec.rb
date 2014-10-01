@@ -6,16 +6,21 @@ describe IntelComputerPlayer do
 	  @ai = IntelComputerPlayer.new
 	  @player = MockPlayer.new
 	end
-
-	it "represents smallest recursive case" do
-		expect(@ai.call_back(5)).to eq(0)
+	
+	it "returns open spaces" do
+		cells = ["X", [], "O", 
+		   			 "X", [], "O", 
+		   			 [], "O", []]
+		expect(@ai.get_open_cells(cells)).to eq([1,4,6,8])
 	end
 
-	it "represents a larger recursive case" do
-		cells = ["X", "X", "O", "X", "O", "O", [], "O", []]
-		depth = 0
-		expect(@ai.minimax_call_back(depth, @player, cells)).to eq([6,8])
-		
+	it "picks the move that will lead to a computer win" do
+		cells = [1,4,5]
+		game_state = ["O", [], "X", 
+		   			 			"X", [],  [], 
+		   			 			"X", "O","O"]
+		expect(@ai.get_best_move(cells, game_state)).to eq([4])
 	end
- 
+
+
 end
