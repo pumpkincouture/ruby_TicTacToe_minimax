@@ -5,6 +5,9 @@ describe IntelComputerPlayer do
 	before :each do
 	  @ai = IntelComputerPlayer.new
 	  @player = MockPlayer.new
+	  @ui = MockUi.new
+	  @choice = 3
+	  @board = Board.new(@ui, @choice)
 	end
 	
 	it "returns open spaces" do
@@ -47,10 +50,22 @@ describe IntelComputerPlayer do
 		expect(@ai.get_possible_moves(computer_spaces, open_spaces)).to eq( [ [1], [2], [3], [4], [5], [6], [7], [8] ] )
 	end
 
-	it "checks if computer can win" do
-	  computer_spaces = [2, 3, 6]
-	  open_spaces = [1,4,6,8]
-		expect(@ai.get_possible_moves(computer_spaces, open_spaces)).to eq( [ [2, 3, 6, 1], [2, 3, 6, 4], [2, 3, 6, 6], [2, 3, 6, 8] ] )
+	it "checks for diagonal match" do
+		@board.cells = ["O", [], "X", 
+		   						  "X", [],  [], 
+		   			 				"X", "O","O"]
+		 
+	  possible_moves = [ [2, 3, 6, 1], [2, 3, 6, 4], [2, 3, 6, 6], [2, 3, 6, 8] ]
+		expect(@ai.check_for_comp_win(possible_moves, @board)).to be true
+	end
+
+	xit "checks if computer can win" do
+		@board.cells = ["O", [], "X", 
+		   						  "X", [],  [], 
+		   			 				"X", "O","O"]
+
+	  possible_moves = [ [2, 3, 6, 1], [2, 3, 6, 4], [2, 3, 6, 6], [2, 3, 6, 8] ]
+		expect(@ai.check_for_comp_win(possible_moves, @board)).to be true
 	end
 
 	it "picks the move that will lead to a computer win" do

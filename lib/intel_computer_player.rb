@@ -31,19 +31,35 @@ class IntelComputerPlayer
 
   def get_possible_moves(computer_spaces, open_spaces)
     possible_moves = []
-
-      open_spaces.each do |space|
-        potential = computer_spaces << space
-        possible_moves << potential.clone
-        computer_spaces.pop
+    open_spaces.each do |space|
+      potential = computer_spaces << space
+      possible_moves << potential.clone
+      computer_spaces.pop
     end
     possible_moves
   end
 
-  def check_for_win(possible_moves)
+  def create_board_state(possible_moves)
 
   end
-  
+
+  def check_against_diagonals(possible_moves, board)
+
+  end
+
+  def check_for_comp_win(possible_moves, board)
+    possible_moves.each do |moves|
+      moves.each do |index|
+        board.display_diagonals.each do |array|
+          array.each_with_index do |space, idx|
+            return idx * board.get_board_size if array.count(index) == idx * board.get_board_size
+          end
+        end
+      end
+    end
+    board.display_diagonals 
+  end
+
   def get_best_move(open_cells, game_state)
     
 
