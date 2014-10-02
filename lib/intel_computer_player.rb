@@ -40,6 +40,10 @@ class IntelComputerPlayer
     possible_moves
   end
 
+  def check_for_win(possible_moves)
+
+  end
+  
   def get_best_move(open_cells, game_state)
     
 
