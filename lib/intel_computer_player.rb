@@ -13,8 +13,12 @@ class IntelComputerPlayer
     return moves
   end
 
+  def computer_spaces(cells)
+
+  end
+
   def get_best_move(open_cells, game_state)
-          
+    
 
   end  
 end
