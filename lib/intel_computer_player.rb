@@ -29,11 +29,13 @@ class IntelComputerPlayer
     human_spaces
   end
 
-  def can_comp_win(computer_spaces, open_spaces)
+  def get_possible_moves(computer_spaces, open_spaces)
     possible_moves = []
-    open_spaces.each do |move|
-      potential = computer_spaces << move
-      p possible_moves << potential
+
+      open_spaces.each do |space|
+        potential = computer_spaces << space
+        possible_moves << potential.clone
+        computer_spaces.pop
     end
     possible_moves
   end

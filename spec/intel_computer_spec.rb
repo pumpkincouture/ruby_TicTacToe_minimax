@@ -31,7 +31,7 @@ describe IntelComputerPlayer do
 	it "checks if computer can win" do
 	  computer_spaces = [2, 3, 6]
 	  open_spaces = [1,4,6,8]
-		expect(@ai.can_comp_win(computer_spaces, open_spaces)).to eq([0, 7, 8])
+		expect(@ai.get_possible_moves(computer_spaces, open_spaces)).to eq([ [2, 3, 6, 1], [2, 3, 6, 4], [2, 3, 6, 6], [2, 3, 6, 8] ])
 	end
 
 
