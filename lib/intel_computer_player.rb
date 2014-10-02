@@ -3,19 +3,18 @@ require_relative 'ttt_constants.rb'
 class IntelComputerPlayer
   include TTTConstants
   
-  def return_move(cells)
-    move = [ rand(cells.length) + 1]
-  end
-
-  def assign_score(cells)
+  def get_open_cells(cells)
+    moves = []
     cells.each_with_index do |space, idx|
-      if idx == 8
-         return 10       
+      if space.empty?
+        moves << idx
       end
     end
+    return moves
   end
 
+  def get_best_move(open_cells, game_state)
+          
 
-
-  
+  end  
 end
