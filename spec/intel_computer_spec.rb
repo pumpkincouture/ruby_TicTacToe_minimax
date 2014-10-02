@@ -4,17 +4,23 @@ describe IntelComputerPlayer do
 
 	before :each do
 	  @ai = IntelComputerPlayer.new
+	  @player = MockPlayer.new
+	end
+	
+	it "returns open spaces" do
+		cells = ["X", [], "O", 
+		   			 "X", [], "O", 
+		   			 [], "O", []]
+		expect(@ai.get_open_cells(cells)).to eq([1,4,6,8])
 	end
 
-	it "returns a random board move" do
-		cells = ["X", "O", [], [], [], [], [], [], []]
-		expect(@ai.return_move(cells)).not_to be_empty
+	it "picks the move that will lead to a computer win" do
+		cells = [1,4,5]
+		game_state = ["O", [], "X", 
+		   			 			"X", [],  [], 
+		   			 			"X", "O","O"]
+		expect(@ai.get_best_move(cells, game_state)).to eq([4])
 	end
 
-	it "assign score to moves" do
-		cells = ["X", "O", [], "X", "X", "O", "O", [], []]
-		expect(@ai.assign_score(cells)).to eq(10)
-	end
 
- 
 end

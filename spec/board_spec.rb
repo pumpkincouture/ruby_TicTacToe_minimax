@@ -51,5 +51,12 @@ describe Board do
 		matrix = "O"
 		expect(@board.get_winning_player(matrix)).to eq("O")
 	end
+
+	it "creates matrix" do
+		@board.cells = ["O", [], "X", 
+		   			 			  "X", [],  [], 
+		   			 			  "X", "O","O"]
+		expect(@board.create_matrix[0]).to eq(["O", [], "O"])
+	end
 end
 
