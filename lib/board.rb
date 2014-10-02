@@ -59,6 +59,10 @@ class Board
     end 
   end
 
+  def create_matrix
+    [get_left_diagonal, get_right_diagonal, get_board_row, get_board_column(get_board_row)]
+  end
+
   private
 
   def check_left_diagonal
