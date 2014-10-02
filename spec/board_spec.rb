@@ -56,7 +56,7 @@ describe Board do
 		@board.cells = ["O", [], "X", 
 		   			 			  "X", [],  [], 
 		   			 			  "X", "O","O"]
-		expect(@board.display_diagonals[0]).to eq(["O", [], "O"])
+		expect(@board.display_diagonals).to eq([ ["O", [], "O"], ["X", [], "X"] ])
 	end
 
 	it "displays board row" do

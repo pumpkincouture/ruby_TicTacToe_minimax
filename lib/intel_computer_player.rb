@@ -10,11 +10,32 @@ class IntelComputerPlayer
         moves << idx
       end
     end
-    return moves
+    moves
   end
 
   def computer_spaces(cells)
+    comp_location = []
+    cells.each_with_index do |space, idx|
+      comp_location << idx if space == X_PIECE
+    end
+    comp_location
+  end
 
+  def human_spaces(cells)
+    human_spaces = []
+    cells.each_with_index do |space, idx|
+      human_spaces << idx if space == O_PIECE
+    end
+    human_spaces
+  end
+
+  def can_comp_win(computer_spaces, open_spaces)
+    possible_moves = []
+    open_spaces.each do |move|
+      potential = computer_spaces << move
+      p possible_moves << potential
+    end
+    possible_moves
   end
 
   def get_best_move(open_cells, game_state)
