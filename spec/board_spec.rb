@@ -52,11 +52,25 @@ describe Board do
 		expect(@board.get_winning_player(matrix)).to eq("O")
 	end
 
-	it "creates matrix" do
+	it "displays diagonals" do
 		@board.cells = ["O", [], "X", 
 		   			 			  "X", [],  [], 
 		   			 			  "X", "O","O"]
-		expect(@board.create_matrix[0]).to eq(["O", [], "O"])
+		expect(@board.display_diagonals[0]).to eq(["O", [], "O"])
+	end
+
+	it "displays board row" do
+		@board.cells = ["O", [], "X", 
+		   			 			  "X", [],  [], 
+		   			 			  "X", "O","O"]
+		expect(@board.display_row).to eq([ ["O", [], "X"], ["X", [], []], ["X", "O", "O"] ])
+	end
+
+	it "displays board column" do
+		@board.cells = ["O", [], "X", 
+		   			 			  "X", [],  [], 
+		   			 			  "X", "O","O"]
+		expect(@board.display_column).to eq([ ["O", "X", "X"], [[], [], "O"], ["X", [], "O"] ])
 	end
 end
 
