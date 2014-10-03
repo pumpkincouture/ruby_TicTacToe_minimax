@@ -29,7 +29,7 @@ class IntelComputerPlayer
     human_spaces
   end
 
-  def get_possible_moves(computer_spaces, open_spaces)
+  def create_board_state(computer_spaces, open_spaces)
     possible_moves = []
     open_spaces.each do |space|
       potential = computer_spaces << space
@@ -37,10 +37,6 @@ class IntelComputerPlayer
       computer_spaces.pop
     end
     possible_moves
-  end
-
-  def create_board_state(possible_moves)
-
   end
 
   def check_against_diagonals(possible_moves, board)

@@ -41,13 +41,13 @@ describe IntelComputerPlayer do
 	it "gets all possible moves" do
 	  computer_spaces = [2, 3, 6]
 	  open_spaces = [1,4,6,8]
-		expect(@ai.get_possible_moves(computer_spaces, open_spaces)).to eq( [ [2, 3, 6, 1], [2, 3, 6, 4], [2, 3, 6, 6], [2, 3, 6, 8] ] )
+		expect(@ai.create_board_state(computer_spaces, open_spaces)).to eq( [ [2, 3, 6, 1], [2, 3, 6, 4], [2, 3, 6, 6], [2, 3, 6, 8] ] )
 	end
 
 	it "gets all possible moves" do
 	  computer_spaces = []
 	  open_spaces = [1, 2, 3, 4, 5, 6, 7, 8]
-		expect(@ai.get_possible_moves(computer_spaces, open_spaces)).to eq( [ [1], [2], [3], [4], [5], [6], [7], [8] ] )
+		expect(@ai.create_board_state(computer_spaces, open_spaces)).to eq( [ [1], [2], [3], [4], [5], [6], [7], [8] ] )
 	end
 
 	it "checks for diagonal match" do
