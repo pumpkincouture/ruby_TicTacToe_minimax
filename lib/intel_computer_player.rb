@@ -13,6 +13,14 @@ class IntelComputerPlayer
     moves
   end
 
+  def computer_spaces(cells)
+    comp_location = []
+    cells.each_with_index do |space, idx|
+      comp_location << idx if space == X_PIECE
+    end
+    comp_location
+  end 
+
   def human_spaces(cells)
     human_spaces = []
     cells.each_with_index do |space, idx|
@@ -29,6 +37,15 @@ class IntelComputerPlayer
       computer_spaces.pop
     end
     possible_moves
+  end
+
+  def minimax(board)
+    return get_score(board_state) if board.board_full? || board.matrix_string?(matrix)
+    scores = []
+    moves = []
+
+
+
   end
 
   def get_score(board_state)

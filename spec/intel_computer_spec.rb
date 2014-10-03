@@ -17,6 +17,20 @@ describe IntelComputerPlayer do
 		expect(@ai.get_open_cells(cells)).to eq( [1,4,6,8] )
 	end
 
+	it "returns the computer spaces" do
+		cells = ["O", [], "X", 
+		   			 "X", [],  [], 
+		   			 "X", "O","O"]
+		expect(@ai.computer_spaces(cells)).to eq( [2, 3, 6] )
+	end
+
+	it "returns the computer spaces" do
+		cells = [[], [], [], 
+		   			 [], [], [], 
+		   			 [], [], []]
+		expect(@ai.computer_spaces(cells)).to eq( [] )
+	end
+
 	it "returns the human spaces" do
 		cells = ["O", [], "X", 
 		   			 "X", [],  [], 
@@ -55,5 +69,12 @@ describe IntelComputerPlayer do
 		   			 				"X", [],  [], 
 		   			 				"X", "O","O"]
 		expect(@ai.get_score(@board)).to eq(0)
+	end
+
+	it "scores the game" do
+		@board.cells = ["O", [], "X", 
+		   			 				"X", "O",  [], 
+		   			 				"X", "O","O"]
+		expect(@ai.get_score(@board)).to eq(-1)
 	end
 end
