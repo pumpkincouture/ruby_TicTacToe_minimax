@@ -3,6 +3,7 @@ require_relative 'board'
 require_relative 'human_player'
 require_relative 'intel_computer_player'
 require_relative 'computer_player'
+require_relative 'player_factory'
 
 class SetUp
 	attr_reader :player, :human_player, :ui, :board
@@ -10,6 +11,7 @@ class SetUp
 	def create_instances
 	  @human_player = HumanPlayer.new
 	  @ui = UserInterface.new
+	  @player_factory = player_factory
 	end
 
 	def choose_board
@@ -25,18 +27,18 @@ class SetUp
 	  @board
 	end
 
-	def choose_player
+	def get_player_choice
 		@ui.prompt_for_player_type
 		player_choice =	@ui.get_player_choice
-
-	  if player_choice == "E"
-		  @player = ComputerPlayer.new
-	  elsif player_choice == "H"
-		  @player = IntelComputerPlayer.new
-		else
-			@ui.print_player_error
-			self.choose_player
-	  end
-	  @player
 	end
+
+	def choose_player
+
+	  until @player 
+	  	player_factory.create_player(player_choice)
+	  	@player = player_factory.create_player(player_choice)
+	  end
+
+	end
+
 end

@@ -40,15 +40,22 @@ class IntelComputerPlayer
   end
 
   def minimax(board)
-    return get_score(board_state) if board.board_full? || board.matrix_string?(matrix)
+    return get_score(board_state) if board.board_full? || board.matrix_string?(board.check_matrix)
     scores = []
     moves = []
 
-
-
+    get_open_cells(board.cells).each do |move|
+      board.cells[move] = X_PIECE
+      potential = board
+      scores << get_score(potential)
+      moves << move
+    end
+    p moves
+    p scores
   end
 
   def get_score(board_state)
+
     if board_state.check_matrix == "X"
        return 1
     elsif board_state.check_matrix == "O"

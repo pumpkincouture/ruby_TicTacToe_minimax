@@ -77,4 +77,19 @@ describe IntelComputerPlayer do
 		   			 				"X", "O","O"]
 		expect(@ai.get_score(@board)).to eq(-1)
 	end
+
+	it "returns scores for 3 states" do
+		@board.cells = ["O", [], "X", 
+		   			 				"X", [], [], 
+		   			 				"X", "O","O"]
+		expect(@ai.minimax(@board)).to eq(1)
+	end
+
+	it "returns scores for 3 states" do
+		@board.cells = ["O", [], [], 
+		   			 				"X", [], [], 
+		   			 				[], "O","O"]
+		expect(@ai.minimax(@board)).to eq(1)
+	end
+
 end
