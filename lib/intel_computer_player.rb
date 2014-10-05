@@ -19,7 +19,7 @@ class IntelComputerPlayer
       comp_location << idx if space == X_PIECE
     end
     comp_location
-  end
+  end 
 
   def human_spaces(cells)
     human_spaces = []
@@ -39,25 +39,29 @@ class IntelComputerPlayer
     possible_moves
   end
 
-  def check_against_diagonals(possible_moves, board)
+  def minimax(board)
+    return get_score(board_state) if board.board_full? || board.matrix_string?(board.check_matrix)
+    scores = []
+    moves = []
 
-  end
-
-  def check_for_comp_win(possible_moves, board)
-    possible_moves.each do |moves|
-      moves.each do |index|
-        board.display_diagonals.each do |array|
-          array.each_with_index do |space, idx|
-            return idx * board.get_board_size if array.count(index) == idx * board.get_board_size
-          end
-        end
-      end
+    get_open_cells(board.cells).each do |move|
+      board.cells[move] = X_PIECE
+      potential = board
+      scores << get_score(potential)
+      moves << move
     end
-    board.display_diagonals 
+    p moves
+    p scores
   end
 
-  def get_best_move(open_cells, game_state)
-    
+  def get_score(board_state)
 
-  end  
+    if board_state.check_matrix == "X"
+       return 1
+    elsif board_state.check_matrix == "O"
+       return -1
+    else
+       return 0
+    end
+  end
 end
