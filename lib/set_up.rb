@@ -11,18 +11,20 @@ class SetUp
 	def create_instances
 	  @human_player = HumanPlayer.new
 	  @ui = UserInterface.new
-	  @player_factory = player_factory
+	  @player_factory = PlayerFactory.new
 	end
 
-	def choose_board
-	  @ui.prompt_for_board
+	def get_board_choice
+		@ui.prompt_for_board
 	  board_choice = @ui.get_board_choice
+	end
 
+	def choose_board(board_choice)
 	  if board_choice.to_i != 0
 			@board = Board.new(@ui, board_choice)
 	  else 
-	  	@ui.print_player_error
-	  	self.choose_board
+	  	print_error
+	  	self.choose_board(get_board_choice)
 	  end
 	  @board
 	end
@@ -32,13 +34,17 @@ class SetUp
 		player_choice =	@ui.get_player_choice
 	end
 
-	def choose_player
-
-	  until @player 
-	  	player_factory.create_player(player_choice)
-	  	@player = player_factory.create_player(player_choice)
+	def choose_player(player_choice)
+		if @player_factory.create_player(player_choice) == false
+			 print_error
+			 @player_factory.create_player(player_choice)
+			 self.choose_player(get_player_choice)
+		else
+			 @player = @player_factory.create_player(player_choice)
 	  end
-
 	end
 
+	def print_error
+		@ui.print_player_error
+	end
 end

@@ -6,9 +6,9 @@ class PlayerFactory
 
 	def create_player(choice)
 		case choice
-		  when choice == "E"
+		  when "E" 
 		    ComputerPlayer.new
-		  when choice == "H"
+		  when "H"
 		    IntelComputerPlayer.new
 		  else
 		  	return false
