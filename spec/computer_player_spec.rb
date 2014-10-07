@@ -11,4 +11,12 @@ describe ComputerPlayer do
 	it "returns open cells" do
 		expect(@computer_player.possible_moves(cells)).to eq(moves)
 	end
+
+	it "picks a move" do
+		cells = ["O", [], "X", 
+		   			 "X", "O","O", 
+		   			 "X", "O","X"]
+		@computer_player.possible_moves(cells)
+		expect(@computer_player.comp_move(@computer_player.possible_moves(cells))).to eq(1)
+	end
 end
