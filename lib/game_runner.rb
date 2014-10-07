@@ -33,7 +33,7 @@ class GameRunner
       ui.user_error
     else
       board.valid_move(human_move, human_player.game_piece)
-      board.computer_move(player.comp_move(player.possible_moves(board.cells))) 
+      board.computer_move(player.comp_move(player.possible_moves(board.cells)), player.game_piece) 
     end
   end
 
