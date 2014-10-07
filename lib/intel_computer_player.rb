@@ -2,50 +2,44 @@ require_relative 'ttt_constants.rb'
 
 class IntelComputerPlayer
   include TTTConstants
+
+  attr_reader :game_piece
+
+  def initialize(game_piece)
+    @game_piece = X_PIECE
+  end
   
-  def computer_spaces(cells)
-    comp_location = []
-    cells.each_with_index do |space, idx|
-      comp_location << idx if space == X_PIECE
-    end
-    comp_location
-  end 
-
-  def human_spaces(cells)
-    human_spaces = []
-    cells.each_with_index do |space, idx|
-      human_spaces << idx if space == O_PIECE
-    end
-    human_spaces
+  def switch_players(game_piece)
+    game_piece == X_PIECE ?  O_PIECE : X_PIECE
   end
 
-  def create_board_state(computer_spaces, open_spaces)
-    possible_moves = []
-    open_spaces.each do |space|
-      potential = computer_spaces << space
-      possible_moves << potential.clone
-      computer_spaces.pop
-    end
-    possible_moves
-  end
-
-  def minimax(board, depth, player)
-    # return move if board.matrix_string?(board.check_matrix) || board.board_full?
-    p "back up here" if depth == 5
+  def minimax(board, game_piece)
+    p "hello" if board.matrix_string?(board.check_matrix) || board.board_full?
+    # p "back up here" if depth == 5
     score_pairs = {}
 
-    if player
+    if game_piece == X_PIECE
       board.open_spaces.each do |move|
         potential_board = board.clone
-        potential_board.cells[move] = X_PIECE
+        potential_board.cells[move] = game_piece
+        p game_piece
+        p potential_board
         score_pairs.store(move, get_score(potential_board))
-        board.clear_board(potential_board, move)
-        p score_pairs
-        # depth += 1
-        # minimax(board, depth, player)
+        next_move = minimax(potential_board, switch_players(game_piece))
+        potential_board.clear_board(potential_board, move)
+        score_pairs.max_by {|move, score| score}[0]
       end
-      score_pairs.min_by {|move, score| score}[0]
-      score_pairs.max_by {|move, score| score}[0]
+    else 
+      board.open_spaces.each do |move|
+        another_board = board.clone
+        another_board.cells[move] = game_piece
+        p game_piece
+        p another_board
+        score_pairs.store(move, get_score(another_board))
+        next_move = minimax(another_board, switch_players(game_piece))
+        another_board.clear_board(another_board, move)
+        score_pairs.min_by {|move, score| score}[0]
+      end
     end
   end
 
