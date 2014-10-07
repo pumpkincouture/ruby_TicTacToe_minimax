@@ -35,11 +35,12 @@ class IntelComputerPlayer
     moves = []
 
     board.open_spaces.each do |move|
-      board.cells[move] = X_PIECE
-      potential = board
-      scores << get_score(potential)
+      potential_board = board.clone
+      potential_board.cells[move] = X_PIECE
+      scores << get_score(potential_board)
       moves << move
-      board.reset
+      potential_board.cells[move] = []
+      p potential_board
     end
     scores
   end
