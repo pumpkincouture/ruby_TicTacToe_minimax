@@ -10,13 +10,6 @@ describe IntelComputerPlayer do
 	  @board = Board.new(@ui, @choice)
 	end
 	
-	it "returns open spaces" do
-		cells = ["X", [], "O", 
-		   			 "X", [], "O", 
-		   			 [], "O", []]
-		expect(@ai.get_open_cells(cells)).to eq( [1,4,6,8] )
-	end
-
 	it "returns the computer spaces" do
 		cells = ["O", [], "X", 
 		   			 "X", [],  [], 
@@ -78,17 +71,24 @@ describe IntelComputerPlayer do
 		expect(@ai.get_score(@board)).to eq(-1)
 	end
 
-	it "returns scores for 3 states" do
+	it "returns move" do
+		@board.cells = ["O", [], "O", 
+		   			 				"X", "O", "X", 
+		   			 				"X", "O","X"]
+		expect(@ai.minimax(@board)).to eq([1])
+	end
+
+	it "returns best move" do
 		@board.cells = ["O", [], "X", 
 		   			 				"X", [], [], 
 		   			 				"X", "O","O"]
-		expect(@ai.minimax(@board)).to eq(1)
+		expect(@ai.minimax(@board)).to eq([4])
 	end
 
-	it "returns scores for 3 states" do
-		@board.cells = ["O", [], [], 
+	xit "returns best move" do
+		@board.cells = ["O", "O", "X", 
 		   			 				"X", [], [], 
-		   			 				[], "O","O"]
+		   			 				"X", "O","O"]
 		expect(@ai.minimax(@board)).to eq(1)
 	end
 

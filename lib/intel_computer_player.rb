@@ -30,7 +30,7 @@ class IntelComputerPlayer
   end
 
   def minimax(board)
-    return get_score(board_state) if board.matrix_string?(board.check_matrix)
+    return moves if board.matrix_string?(board.check_matrix) || board.board_full?
     scores = []
     moves = []
 
@@ -40,9 +40,7 @@ class IntelComputerPlayer
       scores << get_score(potential_board)
       moves << move
       potential_board.cells[move] = []
-      p potential_board
     end
-    scores
   end
 
   def get_score(board_state)
