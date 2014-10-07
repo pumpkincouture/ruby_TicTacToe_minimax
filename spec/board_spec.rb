@@ -46,6 +46,18 @@ describe Board do
 		expect(@board.board_full?).to be true
 	end
 
+	it "clears the board of a move" do
+		@board.cells = ["O", "O", "X", 
+		   			 				"X", [], [], 
+		   			 				"X", "O","O"]
+
+		real_board = 	["O", "O", "X", 
+		   			 			 [], [], [], 
+		   			 			 "X", "O","O"]
+		move = 4
+		expect(@board.clear_board(@board, move)).to eq([])
+	end
+
 	it "finds board size" do
 		expect(@board.get_board_size).to eq(3.0)
 	end

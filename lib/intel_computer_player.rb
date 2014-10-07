@@ -41,11 +41,11 @@ class IntelComputerPlayer
         score_pairs.store(move, get_score(potential_board))
         board.clear_board(potential_board, move)
         p score_pairs
-        depth += 1
-        minimax(board, depth, player)
+        # depth += 1
+        # minimax(board, depth, player)
       end
-      move = score_pairs.max_by {|move, score| score}[0]
       score_pairs.min_by {|move, score| score}[0]
+      score_pairs.max_by {|move, score| score}[0]
     end
   end
 

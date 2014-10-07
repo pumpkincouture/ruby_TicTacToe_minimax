@@ -55,7 +55,7 @@ class UserInterface
     end
 
     def display_board(cells)
-      p cells
+      p cells 
     end 
 end
 

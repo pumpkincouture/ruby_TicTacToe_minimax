@@ -78,7 +78,15 @@ describe IntelComputerPlayer do
 		expect(@ai.minimax(@board, 4, @ai)).to eq(1)
 	end
 
-	xit "returns best move" do
+	it "returns move" do
+		@board.cells = ["O", [], "O", 
+		   			 				"X", [], "X", 
+		   			 				"X", "O","X"]
+		expect(@ai.minimax(@board, 4, @ai)).to eq(4)
+	end
+
+
+	it "returns best move" do
 		@board.cells = ["O", [], "X", 
 		   			 				"X", [], [], 
 		   			 				"X", "O","O"]

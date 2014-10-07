@@ -18,7 +18,7 @@ class Board
   def valid_move(answer, game_piece)
     cells[answer.to_i - 1] = game_piece
     @ui.human_choice(answer)
-    @ui.display_board(cells)
+    @ui.display_board(display_row)
   end
 
   def computer_move(answer, game_piece)
@@ -40,7 +40,7 @@ class Board
   end
 
   def clear_board(potential_board, move)
-    potential_board.cells[move] = []
+     potential_board.cells[move] = []
   end
 
   def get_board_size
