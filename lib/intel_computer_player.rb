@@ -37,10 +37,18 @@ class IntelComputerPlayer
       potential_board = board.clone
       potential_board.cells[move] = X_PIECE
       score_pairs.store(move, get_score(potential_board)) 
-      potential_board.cells[move] = []
+      board.clear_board(potential_board, move) 
+    end
+
+    board.open_spaces.each do |move|
+      potential_board = board.clone
+      potential_board.cells[move] = O_PIECE
+      score_pairs.store(move, get_score(potential_board))
+      board.clear_board(potential_board, move)      
     end
 
     score_pairs.max_by {|move, score| score}[0]
+    score_pairs.min_by {|move, score| score}[0]
   end
 
   def get_score(board_state)

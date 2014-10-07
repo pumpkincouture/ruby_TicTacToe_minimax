@@ -39,6 +39,10 @@ class Board
     spaces
   end
 
+  def clear_board(potential_board, move)
+    potential_board.cells[move] = []
+  end
+
   def get_board_size
     Math.sqrt(cells.length)
   end
