@@ -50,8 +50,6 @@ class IntelComputerPlayer
       scores << get_score(potential)
       moves << move
     end
-    p moves
-    p scores
   end
 
   def get_score(board_state)
