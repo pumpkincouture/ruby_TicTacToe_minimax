@@ -12,17 +12,17 @@ class Board
   end
 
   def invalid_key(answer)
-    answer.to_i == 0 || cells[answer.to_i - 1] == X_PIECE || cells[answer.to_i - 1] == O_PIECE
+    answer.to_i == 0 || cells[answer.to_i - 1] != []
   end
 
-  def valid_move(answer)
-    cells[answer.to_i - 1] = O_PIECE
+  def valid_move(answer, game_piece)
+    cells[answer.to_i - 1] = game_piece
     @ui.human_choice(answer)
     @ui.display_board(cells)
   end
 
-  def computer_move(answer)
-    cells[answer] = X_PIECE
+  def computer_move(answer, game_piece)
+    cells[answer] = game_piece
     @ui.computer_choice(answer)
     @ui.display_board(cells)
   end

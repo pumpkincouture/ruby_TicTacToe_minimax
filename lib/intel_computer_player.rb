@@ -29,8 +29,9 @@ class IntelComputerPlayer
     possible_moves
   end
 
-  def minimax(board, player)
-    return move if board.matrix_string?(board.check_matrix) || board.board_full?
+  def minimax(board, depth, player)
+    # return move if board.matrix_string?(board.check_matrix) || board.board_full?
+    p "back up here" if depth == 5
     score_pairs = {}
 
     if player
@@ -38,17 +39,12 @@ class IntelComputerPlayer
         potential_board = board.clone
         potential_board.cells[move] = X_PIECE
         score_pairs.store(move, get_score(potential_board))
-        p score_pairs
         board.clear_board(potential_board, move)
+        p score_pairs
+        depth += 1
+        minimax(board, depth, player)
       end
-      score_pairs.max_by {|move, score| score}[0]
-    else
-      board.open_spaces.each do |move|
-        potential_board = board.clone
-        potential_board.cells[move] = X_PIECE
-        score_pairs.store(move, get_score(potential_board))
-        board.clear_board(potential_board, move) 
-      end
+      move = score_pairs.max_by {|move, score| score}[0]
       score_pairs.min_by {|move, score| score}[0]
     end
   end

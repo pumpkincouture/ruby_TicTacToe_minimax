@@ -5,11 +5,15 @@ describe ComputerPlayer do
   let(:moves) { [0, 1, 2, 3, 4, 5, 6, 7, 8] }
   
 	before :each do
-	  @computer_player = ComputerPlayer.new
+	  @computer_player = ComputerPlayer.new(@game_piece)
 	end
 
 	it "returns open cells" do
 		expect(@computer_player.possible_moves(cells)).to eq(moves)
+	end
+
+	it "identifies game piece" do
+		expect(@computer_player.game_piece).to eq("X")
 	end
 
 	it "picks a move" do

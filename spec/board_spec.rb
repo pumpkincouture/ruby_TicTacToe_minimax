@@ -4,7 +4,10 @@ describe Board do
   let (:computer_answer) { 9 }
   let (:human_answer) { "6" }
   let (:invalid_answer) { " " }
+
   let (:board_choice) { 3 }
+  let (:human_game_piece) { "O" }
+  let (:computer_game_piece) { "X" }
   
   before :each do
   	@ui = MockUi.new
@@ -21,15 +24,20 @@ describe Board do
 		expect(@board.invalid_key(invalid_answer)).to be true
 	end
 
+	it "if answer is invalid key, returns true" do
+		@board.cells = [ "X", [], [], [], [], "O", [], [], "X" ]
+		expect(@board.invalid_key(1)).to be true
+	end
+
 	it "places move on board if answer is valid" do
 		cells_example = [ [], [], [], [], [], "O", [], [], [] ]
-		@board.valid_move(human_answer)
+		@board.valid_move(human_answer, human_game_piece)
 		expect(@board.cells).to eq(cells_example)
 	end
 
 	it "places move on board" do
 		cells_example = [ [], [], [], [], [], [], [], [], [], "X" ]
-		@board.computer_move(computer_answer)
+		@board.computer_move(computer_answer, computer_game_piece)
 		expect(@board.cells).to eq(cells_example)
 	end
 
