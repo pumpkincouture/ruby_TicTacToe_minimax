@@ -30,20 +30,17 @@ class IntelComputerPlayer
   end
 
   def minimax(board)
-    return score_pairs.max if board.matrix_string?(board.check_matrix) || board.board_full?
+    return score_pairs if board.matrix_string?(board.check_matrix) || board.board_full?
     score_pairs = {}
 
     board.open_spaces.each do |move|
       potential_board = board.clone
       potential_board.cells[move] = X_PIECE
       score_pairs.store(move, get_score(potential_board)) 
-      p score_pairs
       potential_board.cells[move] = []
     end
 
-    p score_pairs.max_by {|move, score| score}[0]
-  
-
+    score_pairs.max_by {|move, score| score}[0]
   end
 
   def get_score(board_state)
