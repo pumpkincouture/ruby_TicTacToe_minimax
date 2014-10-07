@@ -3,16 +3,6 @@ require_relative 'ttt_constants.rb'
 class IntelComputerPlayer
   include TTTConstants
   
-  def get_open_cells(cells)
-    moves = []
-    cells.each_with_index do |space, idx|
-      if space.empty?
-        moves << idx
-      end
-    end
-    moves
-  end
-
   def computer_spaces(cells)
     comp_location = []
     cells.each_with_index do |space, idx|
@@ -40,16 +30,18 @@ class IntelComputerPlayer
   end
 
   def minimax(board)
-    return get_score(board_state) if board.board_full? || board.matrix_string?(board.check_matrix)
+    return get_score(board_state) if board.matrix_string?(board.check_matrix)
     scores = []
     moves = []
 
-    get_open_cells(board.cells).each do |move|
+    board.open_spaces.each do |move|
       board.cells[move] = X_PIECE
       potential = board
       scores << get_score(potential)
       moves << move
+      board.reset
     end
+    scores
   end
 
   def get_score(board_state)

@@ -31,6 +31,14 @@ class Board
     open_spaces.length <= 0
   end
 
+  def open_spaces
+    spaces = []
+    cells.each_with_index do |sub_array, idx|
+    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
+    end
+    spaces
+  end
+
   def get_board_size
     Math.sqrt(cells.length)
   end
@@ -137,13 +145,5 @@ class Board
 
   def get_board_column(rows)
     rows.transpose
-  end
-
-  def open_spaces
-    spaces = []
-    cells.each_with_index do |sub_array, idx|
-    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
-    end
-    spaces
   end
 end
