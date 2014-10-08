@@ -10,7 +10,7 @@ class IntelComputerPlayer
   end
 
   def comp_move(move)
-    move[ rand(move.length) ]
+    move
   end 
 
   def possible_moves(cells)
@@ -46,6 +46,7 @@ class IntelComputerPlayer
         score_pairs.min_by {|move, score| score}[0]
       end
     end
+    p score_pairs
     score_pairs.max_by {|move, score| score}[0] if 0
   end
 
