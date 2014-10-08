@@ -25,7 +25,7 @@ class IntelComputerPlayer
         p game_piece
         p potential_board
         score_pairs.store(move, get_score(potential_board))
-        next_move = minimax(potential_board, switch_players(game_piece))
+        minimax(potential_board, switch_players(game_piece))
         potential_board.clear_board(potential_board, move)
         score_pairs.max_by {|move, score| score}[0]
       end
@@ -45,9 +45,9 @@ class IntelComputerPlayer
 
   def get_score(board_state)
 
-    if board_state.check_matrix == "X"
+    if board_state.check_matrix == X_PIECE
        return 1
-    elsif board_state.check_matrix == "O"
+    elsif board_state.check_matrix == O_PIECE
        return -1
     else
        return 0
