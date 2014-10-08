@@ -8,15 +8,23 @@ class IntelComputerPlayer
   def initialize(game_piece)
     @game_piece = X_PIECE
   end
-  
+
+  def comp_move(move)
+    move[ rand(move.length) ]
+  end 
+
+  def possible_moves(cells)
+    minimax(cells, 5, X_PIECE)
+  end
+
   def switch_players(game_piece)
     game_piece == X_PIECE ?  O_PIECE : X_PIECE
   end
 
-  def minimax(board, game_piece)
+  def minimax(board, depth, game_piece)
+    return -1 if depth == 0
     return 0 if board.matrix_string?(board.check_matrix) || board.board_full?
-    
-    # p "back up here" if depth == 5
+
     score_pairs = {}
 
     if game_piece == X_PIECE
@@ -24,7 +32,7 @@ class IntelComputerPlayer
         potential_board = board.dup
         potential_board.cells[move] = game_piece
         score_pairs.store(move, get_score(potential_board))
-        minimax(potential_board, switch_players(game_piece))
+        minimax(potential_board, depth - 1, switch_players(game_piece))
         potential_board.clear_board(potential_board, move)
         score_pairs.max_by {|move, score| score}[0]
       end
@@ -33,14 +41,12 @@ class IntelComputerPlayer
         another_board = board.dup
         another_board.cells[move] = game_piece
         score_pairs.store(move, get_score(another_board))
-        minimax(another_board, switch_players(game_piece))
+        minimax(another_board, depth - 1, switch_players(game_piece))
         another_board.clear_board(another_board, move)
         score_pairs.min_by {|move, score| score}[0]
       end
     end
-    p score_pairs.max_by {|move, score| score}[0]
-    return score_pairs.max_by {|move, score| score}[0] if 0
-
+    score_pairs.max_by {|move, score| score}[0] if 0
   end
 
   def get_score(board_state)
