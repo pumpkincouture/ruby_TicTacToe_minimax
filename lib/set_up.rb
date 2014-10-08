@@ -9,7 +9,7 @@ class SetUp
 	attr_reader :player, :human_player, :ui, :board
 
 	def create_instances
-	  @human_player = HumanPlayer.new
+	  @human_player = HumanPlayer.new(@game_piece)
 	  @ui = UserInterface.new
 	  @player_factory = PlayerFactory.new
 	end

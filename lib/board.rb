@@ -12,17 +12,17 @@ class Board
   end
 
   def invalid_key(answer)
-    answer.to_i == 0 || cells[answer.to_i - 1] == X_PIECE || cells[answer.to_i - 1] == O_PIECE
+    answer.to_i == 0 || cells[answer.to_i - 1] != []
   end
 
-  def valid_move(answer)
-    cells[answer.to_i - 1] = O_PIECE
+  def valid_move(answer, game_piece)
+    cells[answer.to_i - 1] = game_piece
     @ui.human_choice(answer)
-    @ui.display_board(cells)
+    @ui.display_board(display_row)
   end
 
-  def computer_move(answer)
-    cells[answer] = X_PIECE
+  def computer_move(answer, game_piece)
+    cells[answer] = game_piece
     @ui.computer_choice(answer)
     @ui.display_board(cells)
   end
@@ -37,6 +37,10 @@ class Board
     spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
     end
     spaces
+  end
+
+  def clear_board(potential_board, move)
+     potential_board.cells[move] = []
   end
 
   def get_board_size

@@ -24,7 +24,7 @@ class GameRunner
 
   def first_move
     ui.welcome(player)
-    board.computer_move(player.comp_move(player.possible_moves(board.cells)))
+    board.computer_move(player.comp_move(player.possible_moves(board.cells)), player.game_piece)
   end
 
   def play_game
@@ -32,8 +32,8 @@ class GameRunner
     if board.invalid_key(human_move)
       ui.user_error
     else
-      board.valid_move(human_move)
-      board.computer_move(player.comp_move(player.possible_moves(board.cells))) 
+      board.valid_move(human_move, human_player.game_piece)
+      board.computer_move(player.comp_move(player.possible_moves(board.cells)), player.game_piece) 
     end
   end
 
