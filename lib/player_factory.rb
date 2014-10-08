@@ -4,7 +4,8 @@ require_relative 'human_player'
 require_relative 'ttt_constants'
 
 class PlayerFactory
-
+	include TTTConstants
+	
 	def create_player(choice)
 		case choice
 		  when EASY_PLAYER 
