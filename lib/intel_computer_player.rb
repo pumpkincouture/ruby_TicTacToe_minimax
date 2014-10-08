@@ -14,16 +14,15 @@ class IntelComputerPlayer
   end
 
   def minimax(board, game_piece)
-    p "hello" if board.matrix_string?(board.check_matrix) || board.board_full?
+    return 0 if board.matrix_string?(board.check_matrix) || board.board_full?
+    
     # p "back up here" if depth == 5
     score_pairs = {}
 
     if game_piece == X_PIECE
       board.open_spaces.each do |move|
-        potential_board = board.clone
+        potential_board = board.dup
         potential_board.cells[move] = game_piece
-        p game_piece
-        p potential_board
         score_pairs.store(move, get_score(potential_board))
         minimax(potential_board, switch_players(game_piece))
         potential_board.clear_board(potential_board, move)
@@ -31,16 +30,17 @@ class IntelComputerPlayer
       end
     else 
       board.open_spaces.each do |move|
-        another_board = board.clone
+        another_board = board.dup
         another_board.cells[move] = game_piece
-        p game_piece
-        p another_board
         score_pairs.store(move, get_score(another_board))
-        next_move = minimax(another_board, switch_players(game_piece))
+        minimax(another_board, switch_players(game_piece))
         another_board.clear_board(another_board, move)
         score_pairs.min_by {|move, score| score}[0]
       end
     end
+    p score_pairs.max_by {|move, score| score}[0]
+    return score_pairs.max_by {|move, score| score}[0] if 0
+
   end
 
   def get_score(board_state)
