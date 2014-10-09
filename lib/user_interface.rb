@@ -59,7 +59,15 @@ class UserInterface
     end
 
     def display_board(cells)
-      p cells 
+      cloned_board = cells.clone
+      new_board = ""
+      lines = "---------"
+
+      new_board = cloned_board.map {|cells| cells.join(' | ')}
+      new_board.each do |row|
+        puts row
+        puts lines
+      end
     end 
 end
 
