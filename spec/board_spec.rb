@@ -41,6 +41,55 @@ describe Board do
 		expect(@board.cells).to eq(cells_example)
 	end
 
+	it "checks if winner or draw" do 
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "O", "O", 
+		   			 				"X", "O", "X"]
+	  expect(@board.game_over?).to be true
+	end
+
+	it "checks if winner or draw" do 
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "O", "O", 
+		   			 				"X", "O", "O"]
+	  expect(@board.game_over?).to be true
+	end
+
+	it "checks if winner or draw" do 
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "O", [], 
+		   			 				"X", "O", []]
+	  expect(@board.game_over?).to be false
+	end
+
+	it "checks for a winner" do
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "X", "O", 
+		   			 				"X", "X",[]]
+		expect(@board.winner?).to be true
+	end
+
+	it "checks for a winner" do
+		@board.cells = ["O", "X", "X", 
+		   			 				"X", "X", "O", 
+		   			 				"X", "O",[]]
+		expect(@board.winner?).to be true
+	end
+
+	it "checks for a winner" do
+		@board.cells = ["O", [], "X", 
+		   			 				"X", "O", "O", 
+		   			 				"X", "O", "O"]
+		expect(@board.winner?).to be true
+	end
+
+	it "checks for a draw" do
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "X", "O", 
+		   			 				"X", "O","X"]
+		expect(@board.draw?).to be true
+	end
+
 	it "checks amount of open spaces" do
 		@board.cells = ["X", "X", "O", "X", "O", "O", "O", "O", "X"]
 		expect(@board.board_full?).to be true
