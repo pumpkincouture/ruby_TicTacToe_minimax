@@ -1,4 +1,3 @@
-require './lib/game_status'
 require './lib/game_runner'
 require './lib/board'
 require './lib/computer_player'
