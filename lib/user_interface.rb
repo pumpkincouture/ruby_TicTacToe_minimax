@@ -30,6 +30,10 @@ class UserInterface
       puts "Please choose a number for your 'O'."
     end
 
+    def get_user_answer
+      human_answer = gets.chomp
+    end
+
     def human_choice(answer)
       puts "You chose space number #{answer}."
     end
