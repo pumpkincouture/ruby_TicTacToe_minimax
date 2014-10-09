@@ -1,4 +1,3 @@
-require '../lib/game_status.rb'
 require '../lib/game_runner.rb'
 require '../lib/board.rb'
 require '../lib/computer_player.rb'
