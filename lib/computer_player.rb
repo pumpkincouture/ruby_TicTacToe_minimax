@@ -9,10 +9,7 @@ class ComputerPlayer
     @game_piece = X_PIECE
   end
 
-  # def 
-
   def possible_moves(board)
-
     move = []
     board.cells.each_with_index do |subarray, idx|
       move << idx if subarray != @game_piece && subarray != O_PIECE

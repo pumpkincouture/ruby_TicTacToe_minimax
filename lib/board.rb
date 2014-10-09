@@ -27,6 +27,18 @@ class Board
     @ui.display_board(cells)
   end
 
+  def game_over?
+   winner? || draw?
+  end
+
+  def winner?
+    matrix_string?(check_matrix)
+  end
+
+  def draw?
+    board_full?
+  end
+
   def board_full?
     open_spaces.length <= 0
   end
