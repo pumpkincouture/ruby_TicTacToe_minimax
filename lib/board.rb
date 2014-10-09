@@ -24,7 +24,7 @@ class Board
   def computer_move(answer, game_piece)
     cells[answer] = game_piece
     @ui.computer_choice(answer)
-    @ui.display_board(cells)
+    @ui.display_board(display_row)
   end
 
   def game_over?
@@ -83,16 +83,8 @@ class Board
     end 
   end
 
-  def display_diagonals
-    [get_left_diagonal, get_right_diagonal]
-  end
-
   def display_row
     get_board_row
-  end
-
-  def display_column
-    get_board_column(get_board_row)
   end
 
   private
