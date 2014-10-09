@@ -26,13 +26,18 @@ class GameRunner
   end
 
   def play_game
-    human_move = human_player.user_turn(ui)
-    if board.invalid_key(human_move)
-      ui.user_error
-    else
-      board.valid_move(human_move, human_player.game_piece)
-      board.computer_move(player.comp_move(player.possible_moves(board)), player.game_piece) 
-    end
+    ui.user_prompt
+    human_move = ui.get_user_answer
+      if board.invalid_key(human_move)
+        ui.user_error
+      else
+        board.valid_move(human_move, human_player.game_piece)
+        if board.winner?
+          return true
+        else
+          board.computer_move(player.comp_move(player.possible_moves(board)), player.game_piece) 
+        end
+      end
   end
 
   def end_game_message(winning_player)
