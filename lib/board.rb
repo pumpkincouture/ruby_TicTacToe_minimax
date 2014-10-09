@@ -123,10 +123,9 @@ class Board
         return O_PIECE
       elsif array.count(X_PIECE) == get_board_size
         return X_PIECE
-      else
-        return false
       end
     end
+    false
   end
 
   def check_columns
@@ -135,10 +134,9 @@ class Board
         return O_PIECE
       elsif array.count(X_PIECE) == get_board_size
         return X_PIECE
-      else
-        return false
       end
     end
+    false
   end
 
   def get_left_diagonal
