@@ -1,22 +1,20 @@
-require_relative 'game_status'
 require_relative 'ttt_constants'
 
 class GameRunner
   include TTTConstants
 
-  attr_reader :board, :player, :human_player, :ui, :game_status
+  attr_reader :board, :player, :human_player, :ui
     
   def initialize(board, player, human_player, user_interface)
     @board = board
     @player = player
     @human_player = human_player
     @ui = user_interface
-    @game_status = GameStatus.new
   end
 
   def play!
     first_move
-    until game_status.game_over?(board)
+    until board.game_over?
       play_game
     end
     end_game_message(board.get_winning_player(board.check_matrix))
