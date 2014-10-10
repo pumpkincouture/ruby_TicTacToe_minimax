@@ -9,7 +9,6 @@ class SetUp
 	attr_reader :player, :human_player, :ui, :board
 
 	def create_instances
-	  @human_player = HumanPlayer.new(@game_piece)
 	  @ui = UserInterface.new
 	  @player_factory = PlayerFactory.new
 	end
@@ -34,17 +33,20 @@ class SetUp
 		player_choice =	@ui.get_player_choice
 	end
 
-	def choose_player(player_choice)
-		if @player_factory.create_player(player_choice) == false
-			 print_error
-			 @player_factory.create_player(player_choice)
-			 self.choose_player(get_player_choice)
-		else
-			 @player = @player_factory.create_player(player_choice)
-	  end
+	def get_human_player
+		@player_factory.create_human_player
 	end
 
 	def print_error
 		@ui.print_player_error
+	end
+
+	def choose_player(player_choice)
+		@player = @player_factory.create_player(player_choice)
+		until @player
+			print_error
+			self.choose_player(get_player_choice)
+		end
+		@player
 	end
 end
