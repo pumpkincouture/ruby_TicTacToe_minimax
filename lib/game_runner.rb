@@ -32,11 +32,8 @@ class GameRunner
         ui.user_error
       else
         board.valid_move(human_move, human_player.game_piece)
-        if board.winner?
-          return true
-        else
-          board.computer_move(player.comp_move(player.possible_moves(board)), player.game_piece) 
-        end
+        return true if board.winner?
+        board.computer_move(player.comp_move(player.possible_moves(board)), player.game_piece) 
       end
   end
 
