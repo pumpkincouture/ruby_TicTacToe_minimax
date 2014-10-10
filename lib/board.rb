@@ -46,7 +46,7 @@ class Board
   def open_spaces
     spaces = []
     cells.each_with_index do |sub_array, idx|
-    spaces << idx if sub_array != X_PIECE && sub_array != O_PIECE
+    spaces << idx if sub_array.empty?
     end
     spaces
   end
