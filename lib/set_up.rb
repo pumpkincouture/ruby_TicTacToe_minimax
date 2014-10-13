@@ -6,16 +6,23 @@ require_relative 'computer_player'
 require_relative 'player_factory'
 
 class SetUp
-	attr_reader :player, :human_player, :ui, :board
+	attr_reader :player, :human_player, :ui, :board, :game_piece
 
 	def create_instances
 	  @ui = UserInterface.new
 	  @player_factory = PlayerFactory.new
+	  @human_player = HumanPlayer.new(@game_piece)
 	end
 
 	def get_board_choice
 		@ui.prompt_for_board
 	  board_choice = @ui.get_board_choice
+	end
+
+	def get_game_piece
+		@ui.prompt_for_piece
+		@ui.display_game_pieces
+		game_piece = @ui.get_game_piece
 	end
 
 	def choose_board(board_choice)
@@ -31,10 +38,6 @@ class SetUp
 	def get_player_choice
 		@ui.prompt_for_player_type
 		player_choice =	@ui.get_player_choice
-	end
-
-	def get_human_player
-		@player_factory.create_human_player
 	end
 
 	def print_error
