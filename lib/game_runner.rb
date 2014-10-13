@@ -3,7 +3,7 @@ require_relative 'ttt_constants'
 class GameRunner
   include TTTConstants
 
-  attr_reader :board, :player, :human_player, :ui
+  attr_reader :board, :player, :human_player, :ui, :game_piece
     
   def initialize(board, player, human_player, user_interface)
     @board = board
@@ -14,7 +14,6 @@ class GameRunner
 
   def play!
     first_move
-    board.check_matrix
     until board.game_over?
       play_game
     end
@@ -27,7 +26,8 @@ class GameRunner
   end
 
   def play_game
-    ui.user_prompt
+    p human_player.game_piece
+    ui.user_prompt(human_player.game_piece)
     human_move = ui.get_user_answer
       if board.invalid_key(human_move)
         ui.user_error
