@@ -1,5 +1,8 @@
+require_relative 'ttt_constants'
+
 class UserInterface
-    
+    include TTTConstants
+
     def prompt_for_board
       puts "Welcome to Tic Tac Toe. Please enter a number to determine board size : ex, inputting '6' would create a 6x6 board." 
     end
@@ -14,7 +17,7 @@ class UserInterface
     end
 
     def game_pieces
-      {"1" => "&", "2" => "*", "3" => "%", "4" => "@", "5" => "O"}
+      GAME_PIECES
     end
 
     def display_game_pieces
