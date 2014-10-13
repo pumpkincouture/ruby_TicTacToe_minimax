@@ -6,7 +6,7 @@ describe Board do
   let (:invalid_answer) { " " }
 
   let (:board_choice) { 3 }
-  let (:human_game_piece) { "O" }
+  let (:human_game_piece) { "%" }
   let (:computer_game_piece) { "X" }
   
   before :each do
@@ -25,12 +25,12 @@ describe Board do
 	end
 
 	it "if answer is invalid key, returns true" do
-		@board.cells = [ "X", [], [], [], [], "O", [], [], "X" ]
+		@board.cells = [ "X", [], [], [], [], "#{human_game_piece}", [], [], "X" ]
 		expect(@board.invalid_key(1)).to be true
 	end
 
 	it "places move on board if answer is valid" do
-		cells_example = [ [], [], [], [], [], "O", [], [], [] ]
+		cells_example = [ [], [], [], [], [], "#{human_game_piece}", [], [], [] ]
 		@board.valid_move(human_answer, human_game_piece)
 		expect(@board.cells).to eq(cells_example)
 	end
@@ -42,67 +42,69 @@ describe Board do
 	end
 
 	it "checks if winner or draw" do 
-		@board.cells = ["O", "X", "O", 
-		   			 				"X", "O", "O", 
-		   			 				"X", "O", "X"]
-	  expect(@board.game_over?).to be true
+		@board.cells = ["#{human_game_piece}", "X", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}", "#{human_game_piece}"]
+	  expect(@board.game_over?(human_game_piece)).to be true
 	end
 
 	it "checks if winner or draw" do 
-		@board.cells = ["O", "X", "O", 
-		   			 				"X", "O", "O", 
-		   			 				"X", "O", "O"]
-	  expect(@board.game_over?).to be true
+		@board.cells = ["#{human_game_piece}", "X", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}", "#{human_game_piece}"]
+	  expect(@board.game_over?(human_game_piece)).to be true
 	end
 
 	it "checks if winner or draw" do 
-		@board.cells = ["O", "X", "O", 
-		   			 				"X", "O", [], 
-		   			 				"X", "O", []]
-	  expect(@board.game_over?).to be false
+		@board.cells = ["#{human_game_piece}", "X", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}", [], 
+		   			 				"X", "#{human_game_piece}", []]
+	  expect(@board.game_over?(human_game_piece)).to be false
 	end
 
 	it "checks for a winner" do
-		@board.cells = ["O", "X", "O", 
-		   			 				"X", "X", "O", 
+		@board.cells = ["#{human_game_piece}", "X", "#{human_game_piece}", 
+		   			 				"X", "X", "#{human_game_piece}", 
 		   			 				"X", "X",[]]
-		expect(@board.winner?).to be true
+		expect(@board.winner?(human_game_piece)).to be true
 	end
 
 	it "checks for a winner" do
-		@board.cells = ["O", "X", "X", 
-		   			 				"X", "X", "O", 
-		   			 				"X", "O",[]]
-		expect(@board.winner?).to be true
+		@board.cells = ["#{human_game_piece}", "X", "X", 
+		   			 				"X", "X", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}",[]]
+		expect(@board.winner?(human_game_piece)).to be true
 	end
 
 	it "checks for a winner" do
-		@board.cells = ["O", [], "X", 
-		   			 				"X", "O", "O", 
-		   			 				"X", "O", "O"]
-		expect(@board.winner?).to be true
+		@board.cells = ["#{human_game_piece}", [], "X", 
+		   			 				"X", "#{human_game_piece}", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}", "#{human_game_piece}"]
+		expect(@board.winner?(human_game_piece)).to be true
 	end
 
 	it "checks for a draw" do
-		@board.cells = ["O", "X", "O", 
-		   			 				"X", "X", "O", 
-		   			 				"X", "O","X"]
+		@board.cells = ["#{human_game_piece}", "X", "#{human_game_piece}", 
+		   			 				"X", "X", "#{human_game_piece}", 
+		   			 				"X", "#{human_game_piece}","X"]
 		expect(@board.draw?).to be true
 	end
 
 	it "checks amount of open spaces" do
-		@board.cells = ["X", "X", "O", "X", "O", "O", "O", "O", "X"]
+		@board.cells = ["X", "X", "#{human_game_piece}", 
+										"X", "#{human_game_piece}", "#{human_game_piece}", 
+										"#{human_game_piece}", "#{human_game_piece}", "X"]
 		expect(@board.board_full?).to be true
 	end
 
 	it "clears the board of a move" do
-		@board.cells = ["O", "O", "X", 
+		@board.cells = ["#{human_game_piece}", "#{human_game_piece}", "X", 
 		   			 				"X", [], [], 
-		   			 				"X", "O","O"]
+		   			 				"X", "#{human_game_piece}","#{human_game_piece}"]
 
-		real_board = 	["O", "O", "X", 
+		real_board = 	["#{human_game_piece}", "#{human_game_piece}", "X", 
 		   			 			 [], [], [], 
-		   			 			 "X", "O","O"]
+		   			 			 "X", "#{human_game_piece}","#{human_game_piece}"]
 		move = 4
 		expect(@board.clear_board(@board, move)).to eq([])
 	end
@@ -122,10 +124,10 @@ describe Board do
 	end
 
 	it "displays board row" do
-		@board.cells = ["O", [], "X", 
+		@board.cells = ["#{human_game_piece}", [], "X", 
 		   			 			  "X", [],  [], 
-		   			 			  "X", "O","O"]
-		expect(@board.display_row).to eq([ ["O", [], "X"], ["X", [], []], ["X", "O", "O"] ])
+		   			 			  "X", "#{human_game_piece}","#{human_game_piece}"]
+		expect(@board.display_row).to eq([ ["#{human_game_piece}", [], "X"], ["X", [], []], ["X", "#{human_game_piece}", "#{human_game_piece}"] ])
 	end
 end
 
