@@ -9,6 +9,14 @@ class UserInterface
       choice.to_i
     end
 
+    def prompt_for_piece
+      puts "Please choose your game piece. Please indicate your choice with the appropriate number."
+    end
+
+    def display_game_pieces
+      puts game_pieces = {"1" => "&", "2" => "X", "3" => "%", "4" => "@", "5" => "O"}
+    end
+
     def prompt_for_player_type
       puts "Please choose your player level : press e for easy and h for hard."
     end
