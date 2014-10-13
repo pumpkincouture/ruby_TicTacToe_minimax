@@ -1,6 +1,5 @@
 require_relative 'computer_player'
 require_relative 'intel_computer_player'
-require_relative 'human_player'
 require_relative 'ttt_constants'
 
 class PlayerFactory
