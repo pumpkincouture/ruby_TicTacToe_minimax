@@ -11,18 +11,11 @@ class SetUp
 	def create_instances
 	  @ui = UserInterface.new
 	  @player_factory = PlayerFactory.new
-	  @human_player = HumanPlayer.new(@game_piece)
 	end
 
 	def get_board_choice
 		@ui.prompt_for_board
 	  board_choice = @ui.get_board_choice
-	end
-
-	def get_game_piece
-		@ui.prompt_for_piece
-		@ui.display_game_pieces
-		game_piece = @ui.get_game_piece
 	end
 
 	def choose_board(board_choice)
@@ -33,6 +26,26 @@ class SetUp
 	  	self.choose_board(get_board_choice)
 	  end
 	  @board
+	end
+
+	def prompt_for_game_piece
+		@ui.prompt_for_piece
+		@ui.display_game_pieces
+		@ui.get_game_piece
+	end
+
+	def get_game_piece(game_piece_choice)
+	  if game_piece_choice.to_i <= 5
+	  	@game_piece = @ui.game_pieces[game_piece_choice]
+	  else
+	  	 print_error
+	  	 self.get_game_piece(prompt_for_game_piece)
+	  end
+	  @game_piece
+	end
+
+	def create_human_player
+		@human_player = HumanPlayer.new(get_game_piece(prompt_for_game_piece))
 	end
 
 	def get_player_choice
