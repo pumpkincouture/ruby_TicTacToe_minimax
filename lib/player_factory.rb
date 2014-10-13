@@ -6,10 +6,6 @@ require_relative 'ttt_constants'
 class PlayerFactory
 	include TTTConstants
 	
-	def create_human_player
-		@human_player = HumanPlayer.new(@game_piece)
-	end
-
 	def create_player(choice)
 		case choice
 		  when EASY_PLAYER 
@@ -19,3 +15,4 @@ class PlayerFactory
 		  end
 	end
 end
+
