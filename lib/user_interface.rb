@@ -13,8 +13,17 @@ class UserInterface
       puts "Please choose your game piece. Please indicate your choice with the appropriate number."
     end
 
+    def game_pieces
+      {"1" => "&", "2" => "*", "3" => "%", "4" => "@", "5" => "O"}
+    end
+
     def display_game_pieces
-      puts game_pieces = {"1" => "&", "2" => "X", "3" => "%", "4" => "@", "5" => "O"}
+      puts game_pieces
+    end
+
+    def get_game_piece
+      choice = gets.chomp
+      # return game_pieces[choice]
     end
 
     def prompt_for_player_type
@@ -34,8 +43,8 @@ class UserInterface
       puts "Welcome to Tic Tac Toe against #{player}. The computer will go first." 
     end
 
-    def user_prompt
-      puts "Please choose a number for your 'O'."
+    def user_prompt(game_piece)
+      puts "Please choose a number for your #{game_piece}."
     end
 
     def get_user_answer
