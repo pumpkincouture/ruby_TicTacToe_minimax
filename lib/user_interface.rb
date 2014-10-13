@@ -16,17 +16,14 @@ class UserInterface
       puts "Please choose your game piece. Please indicate your choice with the appropriate number."
     end
 
-    def game_pieces
-      GAME_PIECES
-    end
-
     def display_game_pieces
-      puts game_pieces
+      GAME_PIECES.each do |number, symbol|
+        puts "#{number} : #{symbol}"
+      end
     end
 
     def get_game_piece
       choice = gets.chomp
-      # return game_pieces[choice]
     end
 
     def prompt_for_player_type
