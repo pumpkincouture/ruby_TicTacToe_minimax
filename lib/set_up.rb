@@ -4,6 +4,7 @@ require_relative 'human_player'
 require_relative 'intel_computer_player'
 require_relative 'computer_player'
 require_relative 'player_factory'
+require_relative 'game_piece_factory'
 
 class SetUp
 	attr_reader :player, :human_player, :ui, :board, :game_piece
@@ -11,6 +12,7 @@ class SetUp
 	def create_instances
 	  @ui = UserInterface.new
 	  @player_factory = PlayerFactory.new
+	  @piece_factory = GamePieceFactory.new
 	end
 
 	def get_board_choice
@@ -35,17 +37,16 @@ class SetUp
 	end
 
 	def get_game_piece(game_piece_choice)
-	  if game_piece_choice.to_i <= 5
-	  	@game_piece = @ui.game_pieces[game_piece_choice]
-	  else
-	  	 print_error
-	  	 self.get_game_piece(prompt_for_game_piece)
-	  end
+		@game_piece = @piece_factory.create_game_piece(game_piece_choice)
+			until @game_piece
+				print_error
+				self.get_game_piece(prompt_for_game_piece)
+			end
 	  @game_piece
 	end
 
-	def create_human_player
-		@human_player = HumanPlayer.new(get_game_piece(prompt_for_game_piece))
+	def create_human_player(game_piece)
+		@human_player = HumanPlayer.new(game_piece)
 	end
 
 	def get_player_choice
