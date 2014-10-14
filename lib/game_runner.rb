@@ -14,10 +14,10 @@ class GameRunner
 
   def play!
     first_move
-    until board.game_over?(human_player.game_piece)
+    until board.game_over?(human_player.game_piece, player.game_piece)
       play_game
     end
-    end_game_message(board.get_winning_player(board.check_matrix(human_player.game_piece)))
+    end_game_message(board.get_winning_player(board.check_matrix(human_player.game_piece, player.game_piece)))
   end
 
   def first_move
@@ -32,7 +32,7 @@ class GameRunner
         ui.user_error
       else
         board.valid_move(human_move, human_player.game_piece)
-        return true if board.winner?(human_player.game_piece)
+        return true if board.winner?(human_player.game_piece, player.game_piece)
         board.computer_move(player.comp_move(board), player.game_piece)
       end
   end
