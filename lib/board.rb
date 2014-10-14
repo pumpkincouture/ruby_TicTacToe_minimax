@@ -27,12 +27,12 @@ class Board
     @ui.display_board(display_row)
   end
 
-  def game_over?(game_piece)
-   winner?(game_piece) || draw?
+  def game_over?(human_piece, computer_piece)
+   winner?(human_piece, computer_piece) || draw?
   end
 
-  def winner?(game_piece)
-    matrix_string?(check_matrix(game_piece))
+  def winner?(human_piece, computer_piece)
+    matrix_string?(check_matrix(human_piece, computer_piece))
   end
 
   def draw?
@@ -69,15 +69,15 @@ class Board
     false
   end
 
-  def check_matrix(game_piece)
-    if check_columns(game_piece).is_a? String  
-      return check_columns(game_piece)
-    elsif check_right_diagonal(game_piece).is_a? String
-      return check_right_diagonal(game_piece)
-    elsif check_left_diagonal(game_piece).is_a? String
-      return check_left_diagonal(game_piece)
-    elsif check_rows(game_piece).is_a? String
-      return check_rows(game_piece)
+  def check_matrix(human_piece, computer_piece)
+    if check_columns(human_piece, computer_piece).is_a? String  
+      return check_columns(human_piece, computer_piece)
+    elsif check_right_diagonal(human_piece, computer_piece).is_a? String
+      return check_right_diagonal(human_piece, computer_piece)
+    elsif check_left_diagonal(human_piece, computer_piece).is_a? String
+      return check_left_diagonal(human_piece, computer_piece)
+    elsif check_rows(human_piece, computer_piece).is_a? String
+      return check_rows(human_piece, computer_piece)
     else
       return false
     end 
@@ -89,43 +89,43 @@ class Board
 
   private
 
-  def check_left_diagonal(game_piece)
-    if get_left_diagonal.count(game_piece) == get_board_size 
-      return game_piece
-    elsif get_left_diagonal.count(X_PIECE) == get_board_size
-       return X_PIECE
+  def check_left_diagonal(human_piece, computer_piece)
+    if get_left_diagonal.count(human_piece) == get_board_size 
+      return human_piece
+    elsif get_left_diagonal.count(computer_piece) == get_board_size
+       return computer_piece
     else
       return false
     end
   end
 
-  def check_right_diagonal(game_piece)
-    if get_right_diagonal.count(game_piece) == get_board_size 
-      return game_piece
-    elsif get_right_diagonal.count(X_PIECE) == get_board_size 
-       return X_PIECE    
+  def check_right_diagonal(human_piece, computer_piece)
+    if get_right_diagonal.count(human_piece) == get_board_size 
+      return human_piece
+    elsif get_right_diagonal.count(computer_piece) == get_board_size 
+       return computer_piece
     else
       return false
     end
   end
 
-  def check_rows(game_piece)
+  def check_rows(human_piece, computer_piece)
     get_board_row.each do |array|
-      if array.count(game_piece) == get_board_size
-        return game_piece
-      elsif array.count(X_PIECE) == get_board_size
-        return X_PIECE
+      if array.count(human_piece) == get_board_size
+        return human_piece
+      elsif array.count(computer_piece) == get_board_size
+        return computer_piece
       end
     end
     false
   end
 
-  def check_columns(game_piece)
+  def check_columns(human_piece, computer_piece)
     get_board_column(get_board_row).each do |array| 
-      if array.count(game_piece) == get_board_size
-        return game_piece
-      elsif array.count(X_PIECE) == get_board_size
-        return X_PIECE
+      if array.count(human_piece) == get_board_size
+        return human_piece
+      elsif array.count(computer_piece) == get_board_size
+        return computer_piece
       end
     end
     false
