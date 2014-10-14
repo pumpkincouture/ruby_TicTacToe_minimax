@@ -13,6 +13,11 @@ class IntelComputerPlayer
     move
   end 
 
+  # moves = get all possible possible_moves
+  # get score
+  # get best move
+
+
   def possible_moves(cells)
     minimax(cells, 5, X_PIECE)
   end
@@ -22,25 +27,25 @@ class IntelComputerPlayer
   end
 
   def minimax(board, depth, game_piece)
-    return 1 if board.winner?
-    return 0 if board.board_full?
-    return -1 if depth == 0
+    return get_score(board) if board.game_over?
 
     score_pairs = {}
 
     if game_piece == X_PIECE
       board.open_spaces.each do |move|
-        potential_board = board.dup
-        potential_board.cells[move] = game_piece
+        potential_board = board.cells.dup
+        potential_board[move] = game_piece
         score_pairs.store(move, get_score(potential_board))
+        p score_pairs
         minimax(potential_board, depth - 1, switch_players(game_piece))
         potential_board.clear_board(potential_board, move)
       end
     else 
       board.open_spaces.each do |move|
-        another_board = board.dup
-        another_board.cells[move] = game_piece
+        another_board = board.cells.dup
+        another_board[move] = game_piece
         score_pairs.store(move, get_score(another_board))
+        p score_pairs
         minimax(another_board, depth - 1, switch_players(game_piece))
         another_board.clear_board(another_board, move)
       end

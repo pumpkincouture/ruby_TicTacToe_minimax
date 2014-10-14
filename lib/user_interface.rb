@@ -1,5 +1,8 @@
+require_relative 'ttt_constants'
+
 class UserInterface
-    
+    include TTTConstants
+
     def prompt_for_board
       puts "Welcome to Tic Tac Toe. Please enter a number to determine board size : ex, inputting '6' would create a 6x6 board." 
     end
@@ -7,6 +10,20 @@ class UserInterface
     def get_board_choice
       choice = gets.chomp
       choice.to_i
+    end
+
+    def prompt_for_piece
+      puts "Please choose your game piece. Please indicate your choice with the appropriate number."
+    end
+
+    def display_game_pieces
+      GAME_PIECES.each do |number, symbol|
+        puts "#{number} : #{symbol}"
+      end
+    end
+
+    def get_game_piece
+      choice = gets.chomp
     end
 
     def prompt_for_player_type
@@ -26,8 +43,8 @@ class UserInterface
       puts "Welcome to Tic Tac Toe against #{player}. The computer will go first." 
     end
 
-    def user_prompt
-      puts "Please choose a number for your 'O'."
+    def user_prompt(game_piece)
+      puts "Please choose a number for your #{game_piece}."
     end
 
     def get_user_answer

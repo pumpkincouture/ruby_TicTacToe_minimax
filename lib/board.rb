@@ -27,12 +27,12 @@ class Board
     @ui.display_board(display_row)
   end
 
-  def game_over?
-   winner? || draw?
+  def game_over?(game_piece)
+   winner?(game_piece) || draw?
   end
 
-  def winner?
-    matrix_string?(check_matrix)
+  def winner?(game_piece)
+    matrix_string?(check_matrix(game_piece))
   end
 
   def draw?
@@ -69,15 +69,15 @@ class Board
     false
   end
 
-  def check_matrix
-    if check_columns.is_a? String  
-      return check_columns
-    elsif check_right_diagonal.is_a? String
-      return check_right_diagonal
-    elsif check_left_diagonal.is_a? String
-      return check_left_diagonal
-    elsif check_rows.is_a? String
-      return check_rows
+  def check_matrix(game_piece)
+    if check_columns(game_piece).is_a? String  
+      return check_columns(game_piece)
+    elsif check_right_diagonal(game_piece).is_a? String
+      return check_right_diagonal(game_piece)
+    elsif check_left_diagonal(game_piece).is_a? String
+      return check_left_diagonal(game_piece)
+    elsif check_rows(game_piece).is_a? String
+      return check_rows(game_piece)
     else
       return false
     end 
@@ -89,9 +89,9 @@ class Board
 
   private
 
-  def check_left_diagonal
-    if get_left_diagonal.count(O_PIECE) == get_board_size 
-      return O_PIECE
+  def check_left_diagonal(game_piece)
+    if get_left_diagonal.count(game_piece) == get_board_size 
+      return game_piece
     elsif get_left_diagonal.count(X_PIECE) == get_board_size
        return X_PIECE
     else
@@ -99,9 +99,9 @@ class Board
     end
   end
 
-  def check_right_diagonal
-    if get_right_diagonal.count(O_PIECE) == get_board_size 
-      return O_PIECE
+  def check_right_diagonal(game_piece)
+    if get_right_diagonal.count(game_piece) == get_board_size 
+      return game_piece
     elsif get_right_diagonal.count(X_PIECE) == get_board_size 
        return X_PIECE    
     else
@@ -109,10 +109,10 @@ class Board
     end
   end
 
-  def check_rows
+  def check_rows(game_piece)
     get_board_row.each do |array|
-      if array.count(O_PIECE) == get_board_size
-        return O_PIECE
+      if array.count(game_piece) == get_board_size
+        return game_piece
       elsif array.count(X_PIECE) == get_board_size
         return X_PIECE
       end
@@ -120,10 +120,10 @@ class Board
     false
   end
 
-  def check_columns
+  def check_columns(game_piece)
     get_board_column(get_board_row).each do |array| 
-      if array.count(O_PIECE) == get_board_size
-        return O_PIECE
+      if array.count(game_piece) == get_board_size
+        return game_piece
       elsif array.count(X_PIECE) == get_board_size
         return X_PIECE
       end
