@@ -1,7 +1,4 @@
-require_relative 'ttt_constants'
-
 class GamePieceFactory
-  include TTTConstants
 
 	def create_game_piece(choice)
 		case choice
