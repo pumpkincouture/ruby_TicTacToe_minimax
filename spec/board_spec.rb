@@ -127,7 +127,9 @@ describe Board do
 		@board.cells = ["#{human_game_piece}", [], "#{computer_game_piece}", 
 		   			 			  "#{computer_game_piece}", [],  [], 
 		   			 			  "#{computer_game_piece}", "#{human_game_piece}","#{human_game_piece}"]
-		expect(@board.display_row).to eq([ ["#{human_game_piece}", [], "X"], ["X", [], []], ["X", "#{human_game_piece}", "#{human_game_piece}"] ])
+		expect(@board.display_row).to eq([ ["#{human_game_piece}", [], "#{computer_game_piece}"], 
+																			 ["#{computer_game_piece}", [], []], 
+																			 ["#{computer_game_piece}", "#{human_game_piece}", "#{human_game_piece}"] ])
 	end
 end
 
