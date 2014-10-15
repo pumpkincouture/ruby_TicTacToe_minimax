@@ -9,13 +9,13 @@ class IntelComputerPlayer
     @game_piece = X_PIECE
   end
 
-  def make_move(board, scores = {}, depth, game_piece)
+  def comp_move(board, scores = {}, depth, game_piece)
     return get_score(board) if board.game_over?(O_PIECE, game_piece) || depth == 0
 
     board.open_spaces.each do |move|
         potential_board = board.clone
         potential_board.cells[move] = game_piece
-        scores[move] = make_move(board, {}, depth - 1, switch_players(game_piece))
+        scores[move] = comp_move(board, {}, depth - 1, switch_players(game_piece))
         potential_board.clear_board(potential_board, move)
     end
 
