@@ -9,62 +9,31 @@ class IntelComputerPlayer
     @game_piece = X_PIECE
   end
 
-  def comp_move(move)
-    move
-  end 
+  def comp_move(board, scores = {}, depth, game_piece)
+    return get_score(board) if board.game_over?(O_PIECE, game_piece) || depth == 0
 
-  # moves = get all possible possible_moves
-  # get score
-  # get best move
+    board.open_spaces.each do |move|
+        potential_board = board.clone
+        potential_board.cells[move] = game_piece
+        scores[move] = comp_move(board, {}, depth - 1, switch_players(game_piece))
+        potential_board.clear_board(potential_board, move)
+    end
 
-
-  def possible_moves(cells)
-    minimax(cells, 5, X_PIECE)
+    if depth == 0
+      return scores.max_by {|move, score| score}[0]
+    else
+      return scores.min_by {|move, score| score}[0]
+    end
   end
 
   def switch_players(game_piece)
     game_piece == X_PIECE ?  O_PIECE : X_PIECE
   end
 
-  def minimax(board, depth, game_piece)
-    return get_score(board) if board.game_over?
-
-    score_pairs = {}
-
-    if game_piece == X_PIECE
-      board.open_spaces.each do |move|
-        potential_board = board.cells.dup
-        potential_board[move] = game_piece
-        score_pairs.store(move, get_score(potential_board))
-        p score_pairs
-        minimax(potential_board, depth - 1, switch_players(game_piece))
-        potential_board.clear_board(potential_board, move)
-      end
-    else 
-      board.open_spaces.each do |move|
-        another_board = board.cells.dup
-        another_board[move] = game_piece
-        score_pairs.store(move, get_score(another_board))
-        p score_pairs
-        minimax(another_board, depth - 1, switch_players(game_piece))
-        another_board.clear_board(another_board, move)
-      end
-    end
-
-    if 1
-      return score_pairs.max_by {|move, score| score}[0]
-    elsif 0
-      return score_pairs.min_by {|move, score| score}[0]
-    elsif -1
-      return score_pairs.min_by {|move, score| score}[0]
-    end 
-  end
-
   def get_score(board_state)
-
-    if board_state.check_matrix == X_PIECE
+    if board_state.check_matrix(O_PIECE, @game_piece) == @game_piece
        return 1
-    elsif board_state.check_matrix == O_PIECE
+    elsif board_state.check_matrix(O_PIECE, @game_piece) == O_PIECE
        return -1
     else
        return 0
