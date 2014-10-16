@@ -9,39 +9,46 @@ class IntelComputerPlayer
     @game_piece = X_PIECE
   end
 
-  def comp_move(board, depth = 0, game_piece)
-    return scores_at_depth(depth, board) if board.game_over?(O_PIECE, game_piece) || depth == 4
-
-    scores = {}
-
-    board.open_spaces.each do |move|
-        potential_board = board.clone
-        potential_board.cells[move] = game_piece
-        scores[move] = comp_move(board, depth + 1, switch_players(game_piece))
-        potential_board.clear_board(potential_board, move)
-    end
-
-    if depth == 4
-      scores.max_by {|move, score| score}[0]
-    else
-     scores.min_by {|move, score| score}[0]
-    end
+  def comp_move(board)
+    minimax(board, @game_piece)
   end
 
-  def get_best_move(scores)
+  def clone(board)
+    board.clone
+  end
+
+  def minimax(board, scores = {}, depth = 0, game_piece)
+    return get_scores(board) if board.game_over?(O_PIECE, game_piece)
+
+    board.open_spaces.each do |move|
+        potential_board = clone(board)
+        potential_board.cells[move] = game_piece
+        scores[move] = -10 * minimax(board, {}, depth + 1, switch_players(game_piece))
+        potential_board.clear_board(potential_board, move)
+    end
+    score_depth(depth, scores)
+  end
+
+  def score_depth(depth, scores)
+    depth == 0 ? get_best_move(depth, scores) : get_best_score(depth, scores)
+  end
+
+  def get_best_move(depth, scores)
     scores.max_by {|move, score| score}[0]
   end
 
-  def score_possible_moves
+  def get_best_score(depth, scores)
+    scores.max_by { |move, score| score }[1]
   end
 
-  def get_move_score
-    #depending on depthm get either highest or lowest score
-    # ai_turn?(depth) ? max_score_from(scores) : min_score_from(scores)
-  end
-
-  def switch_players(game_piece)
-    game_piece == X_PIECE ?  O_PIECE : X_PIECE
+  def get_scores(board)
+    if computer_wins?(board)
+      10
+    elsif human_wins?(board)
+      -10
+    else
+      0
+    end
   end
 
   def computer_wins?(board)
@@ -52,13 +59,7 @@ class IntelComputerPlayer
     board.check_matrix(O_PIECE, @game_piece) == O_PIECE
   end
 
-  def scores_at_depth(depth, board)
-    if computer_wins?(board)
-      10 - depth
-    elsif human_wins?(board)
-      depth - 10
-    else
-       0
-    end
+  def switch_players(game_piece)
+    game_piece == X_PIECE ?  O_PIECE : X_PIECE
   end
 end
