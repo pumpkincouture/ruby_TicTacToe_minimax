@@ -2,7 +2,6 @@ require_relative 'spec_helper.rb'
 
 describe IntelComputerPlayer do
 
-
 	before :each do
 	  @ai = IntelComputerPlayer.new(@game_piece)
 	  @ui = MockUi.new
@@ -10,25 +9,39 @@ describe IntelComputerPlayer do
 	  @board = Board.new(@ui, @choice)
 	end
 	
-	it "scores the game" do
-		@board.cells = ["O", "X", "X", 
+	it "checks if computer won" do
+			@board.cells = ["O", "X", "X", 
 		   			 				"X", "X", "X", 
 		   			 				"X", "O","O"]
-		expect(@ai.get_score(@board)).to eq(1)
+	  expect(@ai.computer_wins?(@board)).to be true
 	end
 
-	it "scores the game" do
-		@board.cells = ["O", "O", "O", 
-		   			 				"X", "X", "O", 
+	it "checks if human won" do
+			@board.cells = ["O", "X", "X", 
+		   			 				"X", "O", "X", 
 		   			 				"X", "O","O"]
-		expect(@ai.get_score(@board)).to eq(-1)
+	  expect(@ai.human_wins?(@board)).to be true
 	end
 
-	it "scores the game" do
-		@board.cells = ["O", "X", "X", 
+	it "scores board state using depth" do
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "O", "X", 
+		   			 				"X", "O","X"]
+		expect(@ai.scores_at_depth(1, @board)).to eq(0)
+	end
+
+	it "scores board state using depth" do
+		@board.cells = ["O", "O", "O", 
 		   			 				"X", "O", "O", 
-		   			 				"X", "O", "X"]
-		expect(@ai.get_score(@board)).to eq(0)
+		   			 				"X", "O","O"]
+		expect(@ai.scores_at_depth(1, @board)).to eq(-9)
+	end
+
+	it "scores board state using depth" do
+		@board.cells = ["O", "X", "O", 
+		   			 				"X", "X", "X", 
+		   			 				"X", "O","O"]
+		expect(@ai.scores_at_depth(1, @board)).to eq(9)
 	end
 
 	it "returns moves" do
@@ -46,14 +59,14 @@ describe IntelComputerPlayer do
 	end
 
 
-	xit "returns moves" do
+	it "returns moves" do
 		@board.cells = ["O", [], "X", 
 		   			 				"X", [], [], 
 		   			 				"X", "O","O"]
 		expect(@ai.comp_move(@board, @ai.game_piece)).to eq(4)
 	end
 
-	xit "returns best move" do
+	it "returns best move" do
 		@board.cells = ["O", "X", "O", 
 		   			 				[], [], [], 
 		   			 				[], [],[]]
