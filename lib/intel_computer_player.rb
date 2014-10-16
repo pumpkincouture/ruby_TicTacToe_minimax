@@ -31,17 +31,17 @@ class IntelComputerPlayer
 
   def score_depth(depth, scores)
     if depth == 0 
-      get_best_move(depth, scores) 
+      get_best_move(scores) 
     else
-      get_best_score(depth, scores)
+      get_best_score(scores)
     end
   end
 
-  def get_best_move(depth, scores)
+  def get_best_move(scores)
     scores.max_by {|move, score| score}[0]
   end
 
-  def get_best_score(depth, scores)
+  def get_best_score(scores)
     scores.max_by { |move, score| score }[1]
   end
 
