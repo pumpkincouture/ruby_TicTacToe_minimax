@@ -30,7 +30,11 @@ class IntelComputerPlayer
   end
 
   def score_depth(depth, scores)
-    depth == 0 ? get_best_move(depth, scores) : get_best_score(depth, scores)
+    if depth == 0 
+      get_best_move(depth, scores) 
+    else
+      get_best_score(depth, scores)
+    end
   end
 
   def get_best_move(depth, scores)
