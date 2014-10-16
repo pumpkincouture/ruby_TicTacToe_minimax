@@ -28,6 +28,18 @@ class IntelComputerPlayer
     end
   end
 
+  def get_best_move(scores)
+    scores.max_by {|move, score| score}[0]
+  end
+
+  def score_possible_moves
+  end
+
+  def get_move_score
+    #depending on depthm get either highest or lowest score
+    # ai_turn?(depth) ? max_score_from(scores) : min_score_from(scores)
+  end
+
   def switch_players(game_piece)
     game_piece == X_PIECE ?  O_PIECE : X_PIECE
   end
