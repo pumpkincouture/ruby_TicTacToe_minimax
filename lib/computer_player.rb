@@ -10,6 +10,6 @@ class ComputerPlayer
   end
   
   def comp_move(board)
-    move = board.open_spaces[rand] 
+    board.open_spaces.sample
   end
 end

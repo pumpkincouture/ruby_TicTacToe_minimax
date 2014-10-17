@@ -9,27 +9,50 @@ class IntelComputerPlayer
     @game_piece = X_PIECE
   end
 
-  def comp_move(board, depth = 0, game_piece)
-    return scores_at_depth(depth, board) if board.game_over?(O_PIECE, game_piece) || depth == 4
+  def comp_move(board)
+    minimax(board, @game_piece)
+  end
 
-    scores = {}
+  def clone(board)
+    board.clone
+  end
+
+  def minimax(board, scores = {}, depth = 0, game_piece)
+    return get_scores(board) if board.game_over?(O_PIECE, game_piece)
 
     board.open_spaces.each do |move|
-        potential_board = board.clone
+        potential_board = clone(board)
         potential_board.cells[move] = game_piece
-        scores[move] = comp_move(board, depth + 1, switch_players(game_piece))
+        scores[move] = -10 * minimax(board, {}, depth + 1, switch_players(game_piece))
         potential_board.clear_board(potential_board, move)
     end
+    score_depth(depth, scores)
+  end
 
-    if depth == 4
-      scores.max_by {|move, score| score}[0]
+  def score_depth(depth, scores)
+    if depth == 0 
+      get_best_move(scores) 
     else
-     scores.min_by {|move, score| score}[0]
+      get_best_score(scores)
     end
   end
 
-  def switch_players(game_piece)
-    game_piece == X_PIECE ?  O_PIECE : X_PIECE
+  def get_best_move(scores)
+    scores.max_by {|move, score| score}[0]
+  end
+
+  def get_best_score(scores)
+    scores.max_by { |move, score| score }[1]
+  end
+
+  def get_scores(board)
+    if computer_wins?(board)
+      10
+    elsif human_wins?(board)
+      -10
+    else
+      0
+    end
   end
 
   def computer_wins?(board)
@@ -40,13 +63,7 @@ class IntelComputerPlayer
     board.check_matrix(O_PIECE, @game_piece) == O_PIECE
   end
 
-  def scores_at_depth(depth, board)
-    if computer_wins?(board)
-      10 - depth
-    elsif human_wins?(board)
-      depth - 10
-    else
-       0
-    end
+  def switch_players(game_piece)
+    game_piece == X_PIECE ?  O_PIECE : X_PIECE
   end
 end
