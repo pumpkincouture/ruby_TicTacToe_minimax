@@ -64,5 +64,4 @@ describe IntelComputerPlayer do
 		   			 				[], [],[]]
 		expect(@ai.minimax(@board, @ai.game_piece)).to eq(4)
 	end
-
 end
