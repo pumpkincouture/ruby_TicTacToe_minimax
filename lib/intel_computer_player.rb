@@ -24,7 +24,6 @@ class IntelComputerPlayer
         potential_board = clone(board)
         potential_board.cells[move] = game_piece
         scores[move] = -10 * minimax(board, {}, depth + 1, switch_players(game_piece))
-        potential_board
         potential_board.clear_board(potential_board, move)
     end
     score_depth(depth, scores)
