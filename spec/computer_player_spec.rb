@@ -6,10 +6,9 @@ describe ComputerPlayer do
   
 	before :each do
 	  @computer_player = ComputerPlayer.new(@game_piece)
-	end
-
-	it "returns open cells" do
-		expect(@computer_player.possible_moves(cells)).to eq(moves)
+	  @ui = MockUi.new
+	  @choice = 3
+	  @board = Board.new(@ui, @choice)
 	end
 
 	it "identifies game piece" do
@@ -17,10 +16,9 @@ describe ComputerPlayer do
 	end
 
 	it "picks a move" do
-		cells = ["O", [], "X", 
-		   			 "X", "O","O", 
-		   			 "X", "O","X"]
-		@computer_player.possible_moves(cells)
-		expect(@computer_player.comp_move(@computer_player.possible_moves(cells))).to eq(1)
+		@board.cells = ["O", [], "X", 
+		   						  "X", "O","O", 
+		   			 				"X", "O","X"]
+		expect(@computer_player.comp_move(@board)).to eq(1)
 	end
 end
