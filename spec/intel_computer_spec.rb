@@ -3,6 +3,7 @@ require_relative 'spec_helper.rb'
 describe IntelComputerPlayer do
 
 	before :each do
+		@game_piece = "X"
 	  @ai = IntelComputerPlayer.new(@game_piece)
 	  @ui = MockUi.new
 	  @choice = 3
