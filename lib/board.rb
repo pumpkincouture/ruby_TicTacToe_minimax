@@ -60,7 +60,7 @@ class Board
   end
 
   def matrix_string?(matrix)
-    matrix.is_a? String
+    return true if matrix.is_a? String
     false
   end
 
