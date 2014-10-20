@@ -28,7 +28,7 @@ class Board
   end
 
   def game_over?(human_piece, computer_piece)
-   winner?(human_piece, computer_piece) || draw?
+    winner?(human_piece, computer_piece) || draw?
   end
 
   def winner?(human_piece, computer_piece)
@@ -52,7 +52,7 @@ class Board
   end
 
   def clear_board(potential_board, move)
-     potential_board.cells[move] = []
+    potential_board.cells[move] = []
   end
 
   def get_board_size
@@ -60,7 +60,7 @@ class Board
   end
 
   def matrix_string?(matrix)
-    return true if matrix.is_a? String
+    matrix.is_a? String
     false
   end
 
