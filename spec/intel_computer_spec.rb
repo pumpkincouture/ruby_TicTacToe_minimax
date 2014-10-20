@@ -62,7 +62,7 @@ describe IntelComputerPlayer do
 		@board.cells = [[], [], [], 
 		   			 				[], [],[], 
 		   			 				[], [],[]]
-		expect(@ai.comp_move(@board)).to eq(0)
+		expect(@ai.comp_move(@board)).to eq(4)
 	end
 
 	it "returns best move given that opponent has taken corners" do
