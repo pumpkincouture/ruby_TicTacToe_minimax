@@ -10,7 +10,7 @@ class IntelComputerPlayer
   end
 
   def comp_move(board)
-    minimax(board, @game_piece)
+    board.open_spaces.length == board.get_board_size ** 2 ? 4 : minimax(board, @game_piece)
   end
 
   private 
