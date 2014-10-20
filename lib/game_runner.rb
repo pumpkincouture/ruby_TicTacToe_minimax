@@ -40,8 +40,12 @@ class GameRunner
   end
 
   def end_game_message(winning_player)
-    ui.human_wins if winning_player != X_PIECE
-    ui.computer_wins if winning_player == X_PIECE
-    ui.cats_game if winning_player == false
+    if winning_player == @human_player.game_piece
+      ui.human_wins
+    elsif winning_player == @player.game_piece
+      ui.computer_wins
+    else
+      ui.cats_game
+    end
   end
 end
