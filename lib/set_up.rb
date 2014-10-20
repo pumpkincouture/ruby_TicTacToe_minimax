@@ -5,7 +5,6 @@ require_relative 'intel_computer_player'
 require_relative 'computer_player'
 require_relative 'player_factory'
 require_relative 'game_piece_factory'
-require_relative 'ttt_constants'
 
 class SetUp
 	include TTTConstants
