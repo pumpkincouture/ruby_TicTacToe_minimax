@@ -22,6 +22,7 @@ class GameRunner
 
   def first_move
     ui.welcome(player)
+    ui.computer_thinking
     board.computer_move(player.comp_move(board), player.game_piece)
   end
 
@@ -33,6 +34,7 @@ class GameRunner
       else
         board.valid_move(human_move, human_player.game_piece)
         return true if board.winner?(human_player.game_piece, player.game_piece)
+        ui.computer_thinking
         board.computer_move(player.comp_move(board), player.game_piece)
       end
   end
