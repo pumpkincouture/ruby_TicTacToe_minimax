@@ -66,6 +66,6 @@ class IntelComputerPlayer
   end
 
   def switch_players(game_piece)
-    game_piece == X_PIECE ?  O_PIECE : X_PIECE
+    game_piece == @game_piece ?  O_PIECE : @game_piece
   end
 end
