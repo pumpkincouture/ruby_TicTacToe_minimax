@@ -13,6 +13,8 @@ class IntelComputerPlayer
     minimax(board, @game_piece)
   end
 
+  private 
+
   def clone(board)
     board.clone
   end
