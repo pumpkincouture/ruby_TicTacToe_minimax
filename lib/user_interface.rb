@@ -55,6 +55,10 @@ class UserInterface
       puts "You chose space number #{answer}."
     end
 
+    def computer_thinking
+      puts "The computer is thinking of a move..."
+    end
+
     def computer_choice(answer)
       puts "Computer chose space number #{answer + 1}."
     end
