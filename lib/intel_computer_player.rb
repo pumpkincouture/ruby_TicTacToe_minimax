@@ -1,33 +1,27 @@
-require_relative 'ttt_constants.rb'
+require_relative 'ttt_constants'
+require_relative 'player'
 
-class IntelComputerPlayer
+class IntelComputerPlayer < Player
   include TTTConstants
-
-  attr_reader :game_piece
-
-  def initialize(game_piece)
-    @game_piece = game_piece
-  end
 
   def comp_move(board)
     board.open_spaces.length == board.get_board_size ** 2 ? (board.open_spaces.length/board.get_board_size + 1).to_i : minimax(board, @game_piece)
   end
-
-  private 
 
   def clone(board)
     board.clone
   end
 
   def minimax(board, scores = {}, depth = 0, game_piece)
-    return get_scores(board) if board.game_over?(O_PIECE, game_piece)
+    return get_scores(board) if board.game_over?(board.get_opponent_piece(game_piece), game_piece)
 
     board.open_spaces.each do |move|
         potential_board = clone(board)
         potential_board.cells[move] = game_piece
-        scores[move] = -10 * minimax(board, {}, depth + 1, switch_players(game_piece))
+        scores[move] = -10 * minimax(board, {}, depth + 1, switch_players(board, game_piece))
         potential_board.clear_board(potential_board, move)
     end
+    p scores
     score_depth(depth, scores)
   end
 
@@ -43,6 +37,10 @@ class IntelComputerPlayer
     scores.max_by { |move, score| score }[1]
   end
 
+  def get_min_move(scores)
+    scores.min_by {|move, score| score}[0]
+  end
+
   def get_scores(board)
     if computer_wins?(board)
       10
@@ -54,14 +52,14 @@ class IntelComputerPlayer
   end
 
   def computer_wins?(board)
-    board.check_matrix(O_PIECE, @game_piece) == @game_piece
+    board.check_matrix(board.get_opponent_piece(game_piece), @game_piece) == @game_piece
   end
 
   def human_wins?(board)
-    board.check_matrix(O_PIECE, @game_piece) == O_PIECE
+    board.check_matrix(board.get_opponent_piece(game_piece), @game_piece) != @game_piece
   end
 
-  def switch_players(game_piece)
-    game_piece == @game_piece ?  O_PIECE : @game_piece
+  def switch_players(board, game_piece)
+    game_piece == @game_piece ?  board.get_opponent_piece(game_piece) : @game_piece
   end
 end
