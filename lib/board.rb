@@ -1,8 +1,4 @@
-require_relative 'ttt_constants'
-
 class Board
-  include TTTConstants
-
   attr_accessor :cells
 
   def initialize(user_interface, board_choice)
@@ -12,17 +8,25 @@ class Board
   end
 
   def invalid_key(answer)
-    answer.to_i == 0 || cells[answer.to_i - 1] != []
+    answer.to_i == 0 || !cells[convert_move(answer)].empty?
+  end
+
+  def convert_move(answer)
+    answer.to_i - 1
+  end
+
+  def place_move(answer, game_piece)
+    cells[answer] = game_piece
   end
 
   def valid_move(answer, game_piece)
-    cells[answer.to_i - 1] = game_piece
+    place_move(convert_move(answer), game_piece)
     @ui.human_choice(answer)
     @ui.display_board(display_row)
   end
 
   def computer_move(answer, game_piece)
-    cells[answer] = game_piece
+    place_move(answer, game_piece)
     @ui.computer_choice(answer)
     @ui.display_board(display_row)
   end
@@ -33,6 +37,18 @@ class Board
 
   def winner?(human_piece, computer_piece)
     matrix_string?(check_matrix(human_piece, computer_piece))
+  end
+
+  def get_opponent_piece(game_piece)
+    occupied_spaces.select {|piece| piece != game_piece}[0]
+  end
+
+  def occupied_spaces
+    spaces = []
+    cells.each do |array|
+      spaces << array if !array.empty?
+    end
+    spaces
   end
 
   def draw?
@@ -46,7 +62,7 @@ class Board
   def open_spaces
     spaces = []
     cells.each_with_index do |sub_array, idx|
-    spaces << idx if sub_array.empty?
+      spaces << idx if sub_array.empty?
     end
     spaces
   end
@@ -60,13 +76,11 @@ class Board
   end
 
   def matrix_string?(matrix)
-    return true if matrix.is_a? String
-    false
+    matrix.is_a? String
   end
 
   def get_winning_player(matrix)
-    return matrix if matrix.is_a? String
-    false
+    matrix.is_a?(String) ? matrix : false
   end
 
   def check_matrix(human_piece, computer_piece)

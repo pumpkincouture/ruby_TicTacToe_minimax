@@ -1,13 +1,10 @@
 require_relative 'user_interface'
 require_relative 'board'
 require_relative 'human_player'
-require_relative 'intel_computer_player'
-require_relative 'computer_player'
 require_relative 'player_factory'
 require_relative 'game_piece_factory'
 
 class SetUp
-	include TTTConstants
 
 	attr_reader :player, :human_player, :ui, :board, :game_piece
 
@@ -15,6 +12,13 @@ class SetUp
 	  @ui = UserInterface.new
 	  @player_factory = PlayerFactory.new
 	  @piece_factory = GamePieceFactory.new
+	end
+
+	def set_up_game
+	  choose_board(get_board_choice)
+	  choose_player(get_player_choice)
+	  get_game_piece(prompt_for_game_piece)
+	  create_human_player
 	end
 
 	def get_board_choice
@@ -26,10 +30,9 @@ class SetUp
 	  if board_choice.to_i != 0
 			@board = Board.new(@ui, board_choice)
 	  else 
-	  	print_error
+			@ui.print_player_error
 	  	self.choose_board(get_board_choice)
 	  end
-	  @board
 	end
 
 	def prompt_for_game_piece
@@ -40,15 +43,14 @@ class SetUp
 
 	def get_game_piece(game_piece_choice)
 		@game_piece = @piece_factory.create_game_piece(game_piece_choice)
-			until @game_piece
-				print_error
-				self.get_game_piece(prompt_for_game_piece)
-			end
-	  @game_piece
+		until @game_piece
+		  @ui.print_player_error
+			self.get_game_piece(prompt_for_game_piece)
+		end
 	end
 
-	def create_human_player(game_piece)
-		@human_player = HumanPlayer.new(game_piece)
+	def create_human_player
+		@human_player = HumanPlayer.new(@game_piece)
 	end
 
 	def get_player_choice
@@ -56,16 +58,11 @@ class SetUp
 		player_choice =	@ui.get_player_choice
 	end
 
-	def print_error
-		@ui.print_player_error
-	end
-
 	def choose_player(player_choice)
 		@player = @player_factory.create_player(player_choice)
 		until @player
-			print_error
+			@ui.print_player_error
 			self.choose_player(get_player_choice)
 		end
-		@player
 	end
 end

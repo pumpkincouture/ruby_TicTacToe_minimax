@@ -1,4 +1,4 @@
-require_relative 'spec_helper.rb'
+require_relative 'spec_helper'
 
 describe Board do
   let (:computer_answer) { 9 }
@@ -81,6 +81,20 @@ describe Board do
 		   			 				"#{computer_game_piece}", "#{human_game_piece}", "#{human_game_piece}", 
 		   			 				"#{computer_game_piece}", "#{human_game_piece}", "#{human_game_piece}"]
 		expect(@board.winner?(human_game_piece, computer_game_piece)).to be true
+	end
+
+	it "returns opponent's piece" do
+		@board.cells = ["#{human_game_piece}", [], "#{computer_game_piece}", 
+		   			 					[], [], [], 
+		   			 				"#{computer_game_piece}", [], []]
+		expect(@board.get_opponent_piece(computer_game_piece)).to eq("%")
+	end
+
+	it "returns occupied spaces" do
+		@board.cells = ["#{human_game_piece}", [], "#{computer_game_piece}", 
+		   			 					[], [], [], 
+		   			 				"#{computer_game_piece}", [], []]
+		expect(@board.occupied_spaces).to eq(["%", "X", "X"])
 	end
 
 	it "checks for a draw" do

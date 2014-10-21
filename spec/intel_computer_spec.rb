@@ -1,26 +1,28 @@
-require_relative 'spec_helper.rb'
+require_relative 'spec_helper'
 
 describe IntelComputerPlayer do
+
+	let (:human_game_piece) { "%" }
+  let (:computer_game_piece) { "X" }
 
 	before :each do
 		@game_piece = "X"
 	  @ai = IntelComputerPlayer.new(@game_piece)
-	  @ui = MockUi.new
 	  @choice = 3
 	  @board = Board.new(@ui, @choice)
 	end
 	
 	it "returns last move" do
-		@board.cells = ["O", [], "O", 
-		   			 				"X", "O", "X", 
-		   			 				"X", "O","X"]
+		@board.cells = ["#{human_game_piece}", [], "#{human_game_piece}", 
+		   			 				"#{computer_game_piece}", "#{human_game_piece}", "#{computer_game_piece}", 
+		   			 				"#{computer_game_piece}", "#{human_game_piece}", "#{computer_game_piece}"]
 		expect(@ai.comp_move(@board)).to eq(1)
 	end
 
 	it "returns a win for itself instead of a win for the opponent" do
-		@board.cells = [ "O", [], "O", 
-		   			 				 [],  "X", "X", 
-		   			 				 "O", "X", "O"]
+		@board.cells = [ "#{human_game_piece}", [], "#{human_game_piece}",
+		   			 				 [],  "#{computer_game_piece}", "#{computer_game_piece}", 
+		   			 				 "#{human_game_piece}", "#{computer_game_piece}", "#{human_game_piece}"]
 		expect(@ai.comp_move(@board)).to eq(1)
 	end
 
@@ -49,10 +51,10 @@ describe IntelComputerPlayer do
 		@board.cells = ["O", [], "O", 
 		   			 				[], [], [], 
 		   			 				[], [],[]]
-		expect(@ai.comp_move(@board)).to eq(1)
+		expect(@ai.comp_move(@board)).to eq(7)
 	end
 
-	it "returns best move given one space taken by its opponent" do
+	it "returns best move given one space taken by opponent" do
 		@board.cells = [[], [], [], 
 		   			 				[], "O",[], 
 		   			 				[], [],[]]
@@ -70,6 +72,6 @@ describe IntelComputerPlayer do
 		@board.cells = ["O", "X", "O", 
 		   			 				[], [], [], 
 		   			 				[], [],[]]
-		expect(@ai.comp_move(@board)).to eq(4)
+		expect(@ai.comp_move(@board)).to eq(7)
 	end
 end

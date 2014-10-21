@@ -6,17 +6,16 @@ class PlayerFactory
 	include TTTConstants
 
 	def get_game_piece
-		game_pieces = GAME_PIECES.values
-		@game_piece = game_pieces[rand(game_pieces.length)]
+	  COMP_PIECES.sample
 	end
 
 	def create_player(choice)
 		case choice
-		  when EASY_PLAYER 
-		    ComputerPlayer.new(get_game_piece)
-		  when AI_PLAYER
-		    IntelComputerPlayer.new(get_game_piece)
-		  end
+		when EASY_PLAYER 
+		  ComputerPlayer.new(get_game_piece)
+		when AI_PLAYER
+		  IntelComputerPlayer.new(get_game_piece)
+		end
 	end
 end
 

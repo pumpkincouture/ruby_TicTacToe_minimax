@@ -1,14 +1,7 @@
-require_relative 'ttt_constants'
+require_relative 'player'
 
-class ComputerPlayer
-  include TTTConstants
+class ComputerPlayer < Player
 
-  attr_reader :game_piece
-
-  def initialize(game_piece)
-    @game_piece = game_piece
-  end
-  
   def comp_move(board)
     board.open_spaces.sample
   end
