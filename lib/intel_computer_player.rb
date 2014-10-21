@@ -1,8 +1,6 @@
-require_relative 'ttt_constants'
 require_relative 'player'
 
 class IntelComputerPlayer < Player
-  include TTTConstants
 
   def comp_move(board)
     board.open_spaces.length == board.get_board_size ** 2 ? (board.open_spaces.length/board.get_board_size + 1).to_i : minimax(board, @game_piece)
@@ -21,7 +19,6 @@ class IntelComputerPlayer < Player
         scores[move] = -10 * minimax(board, {}, depth + 1, switch_players(board, game_piece))
         potential_board.clear_board(potential_board, move)
     end
-    p scores
     score_depth(depth, scores)
   end
 
@@ -36,11 +33,7 @@ class IntelComputerPlayer < Player
   def get_best_score(scores)
     scores.max_by { |move, score| score }[1]
   end
-
-  def get_min_move(scores)
-    scores.min_by {|move, score| score}[0]
-  end
-
+  
   def get_scores(board)
     if computer_wins?(board)
       10
