@@ -26,56 +26,49 @@ describe IntelComputerPlayer do
 		expect(@ai.comp_move(@board)).to eq(1)
 	end
 
-	xit "returns a win for itself instead of pursuing a cat's game" do
+	it "returns a win for itself instead of pursuing a cat's game" do
 		@board.cells = [ "X", [], "O", 
 		   			 				 [],  [], "X", 
 		   			 				 "X", "O", "O"]
 		expect(@ai.comp_move(@board)).to eq(3)
 	end
 
-	xit "returns a win for itself" do
+	it "returns a win for itself" do
 		@board.cells = [ "X", "X", "O", 
 		   			 				 "O", [], "X", 
 		   			 				 "X", [], "X"]
 		expect(@ai.comp_move(@board)).to eq(4)
 	end
 
-	xit "returns a win for itself, and a block for the opponent" do
+	it "returns a win for itself, and a block for the opponent" do
 		@board.cells = ["O", [], "X", 
 		   			 				"X", [], [], 
 		   			 				"X", "O","O"]
 		expect(@ai.comp_move(@board)).to eq(4)
 	end
 
-	xit "returns best move given two spots taken on the board" do
+	it "returns best move given two spots taken on the board" do
 		@board.cells = ["O", [], "O", 
 		   			 				[], [], [], 
 		   			 				[], [],[]]
 		expect(@ai.comp_move(@board)).to eq(7)
 	end
 
-	xit "returns best move given one space taken by its opponent" do
+	it "returns best move given one space taken by its opponent" do
 		@board.cells = [[], [], [], 
 		   			 				[], "O",[], 
 		   			 				[], [],[]]
 		expect(@ai.comp_move(@board)).to eq(0)
 	end
 
-	it "returns a move given several" do
-		@board.cells = ["#{human_game_piece}", [], "#{computer_game_piece}", 
-		   			 				"#{human_game_piece}", "#{computer_game_piece}", [],
-		   			 				[], [],[]]
-		expect(@ai.comp_move(@board)).to eq(7)
-	end
-
-	xit "returns best move given a blank board" do
+	it "returns best move given a blank board" do
 		@board.cells = [[], [], [], 
 		   			 				[], [],[], 
 		   			 				[], [],[]]
 		expect(@ai.comp_move(@board)).to eq(4)
 	end
 
-	xit "returns best move given that opponent has taken corners" do
+	it "returns best move given that opponent has taken corners" do
 		@board.cells = ["O", "X", "O", 
 		   			 				[], [], [], 
 		   			 				[], [],[]]

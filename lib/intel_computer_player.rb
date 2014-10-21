@@ -10,6 +10,8 @@ class IntelComputerPlayer < Player
     board.clone
   end
 
+  private
+
   def minimax(board, scores = {}, depth = 0, game_piece)
     return get_scores(board) if board.game_over?(board.get_opponent_piece(game_piece), game_piece)
 
@@ -33,7 +35,7 @@ class IntelComputerPlayer < Player
   def get_best_score(scores)
     scores.max_by { |move, score| score }[1]
   end
-  
+
   def get_scores(board)
     if computer_wins?(board)
       10
