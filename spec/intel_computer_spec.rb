@@ -54,7 +54,7 @@ describe IntelComputerPlayer do
 		expect(@ai.comp_move(@board)).to eq(7)
 	end
 
-	it "returns best move given one space taken by its opponent" do
+	it "returns best move given one space taken by opponent" do
 		@board.cells = [[], [], [], 
 		   			 				[], "O",[], 
 		   			 				[], [],[]]
