@@ -1,4 +1,4 @@
-require_relative 'spec_helper.rb'
+require_relative 'spec_helper'
 
 describe ComputerPlayer do
   let(:cells) { [[], [], [], [], [], [], [], [], []]}
@@ -7,7 +7,6 @@ describe ComputerPlayer do
 	before :each do
 		@game_piece = "&"
 	  @computer_player = ComputerPlayer.new(@game_piece)
-	  @ui = MockUi.new
 	  @choice = 3
 	  @board = Board.new(@ui, @choice)
 	end
