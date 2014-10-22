@@ -13,7 +13,7 @@ class IntelComputerPlayer < Player
   private
 
   def minimax(board, scores = {}, depth = 0, game_piece)
-    return get_scores(board, game_piece) if board.game_over?(board.get_opponent_piece(game_piece), game_piece)
+    return get_scores(board, game_piece) if game_over?(board, game_piece)
 
     board.open_spaces.each do |move|
         potential_board = clone(board)
@@ -37,23 +37,19 @@ class IntelComputerPlayer < Player
   end
 
   def get_scores(board, game_piece)
-    if game_over?(board, game_piece)
+    if human_wins?(board)
       -10
     else
       0
     end
   end
 
-  def game_over?(board, game_piece)
-    board.game_over?(board.get_opponent_piece(game_piece), game_piece)
-  end
-
-  def computer_wins?(board)
-    board.check_matrix(board.get_opponent_piece(game_piece), @game_piece) == @game_piece
-  end
-
   def human_wins?(board)
     board.check_matrix(board.get_opponent_piece(game_piece), @game_piece) != @game_piece
+  end
+
+  def game_over?(board, game_piece)
+    board.game_over?(board.get_opponent_piece(game_piece), game_piece)
   end
 
   def switch_players(board, game_piece)
