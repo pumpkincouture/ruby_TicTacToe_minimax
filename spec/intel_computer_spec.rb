@@ -26,13 +26,6 @@ describe IntelComputerPlayer do
 		expect(@ai.comp_move(@board)).to eq(1)
 	end
 
-	it "returns a win for itself instead of pursuing a cat's game" do
-		@board.cells = [ "X", [], "O", 
-		   			 				 [],  [], "X", 
-		   			 				 "X", "O", "O"]
-		expect(@ai.comp_move(@board)).to eq(3)
-	end
-
 	it "returns a win for itself" do
 		@board.cells = [ "X", "X", "O", 
 		   			 				 "O", [], "X", 
