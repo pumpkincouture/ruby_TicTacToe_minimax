@@ -33,6 +33,13 @@ describe IntelComputerPlayer do
 		expect(@ai.comp_move(@board)).to eq(4)
 	end
 
+	it "blocks opponent" do
+		@board.cells = [ "O", "X", [], 
+		   			 				 "O", "X", [], 
+		   			 				 [], [], []]
+		expect(@ai.comp_move(@board)).to eq(6)
+	end
+
 	it "returns a win for itself, and a block for the opponent" do
 		@board.cells = ["O", [], "X", 
 		   			 				"X", [], [], 
