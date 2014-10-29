@@ -22,7 +22,7 @@ class GameRunner
   end    
 
   def first_move
-    ui.welcome(player)
+    ui.welcome(player.class, player.game_piece)
     ui.computer_thinking
     board.computer_move(player.comp_move(board), player.game_piece)
   end
