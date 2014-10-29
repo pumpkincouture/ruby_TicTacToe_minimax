@@ -39,8 +39,8 @@ class UserInterface
       puts "That's not a valid choice, please try again."
     end
 
-    def welcome(player)
-      puts "Welcome to Tic Tac Toe against #{player}. The computer will place its #{player.game_piece} on the board first." 
+    def welcome(player, game_piece)
+      puts "Welcome to Tic Tac Toe against #{player}. The computer will place its #{game_piece} on the board first." 
     end
 
     def user_prompt(game_piece)
