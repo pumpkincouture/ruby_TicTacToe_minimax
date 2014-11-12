@@ -14,7 +14,7 @@ More information about Minimax found here :
 
 ##Playing the game
 
-To play game, clone the repository to your computer. Navigate to the ```ruby_TicTacToe_minimax``` directory using Terminal. Type : ````ruby play_game.rb``` to run.
+To play game, clone the repository to your computer. Navigate to the ```ruby_TicTacToe_minimax``` directory using Terminal. Type : ```ruby play_game.rb``` to run.
 
 ##Instructions to run the test suite
 
