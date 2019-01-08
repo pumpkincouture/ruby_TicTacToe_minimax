@@ -4,12 +4,11 @@ class UserInterface
     include TTTConstants
 
     def prompt_for_board
-      puts "Welcome to Tic Tac Toe. Please enter a number to determine board size : ex, inputting '6' would create a 6x6 board." 
+      puts "Welcome to Tic Tac Toe. We will play on a 3x3 board!"
     end
 
-    def get_board_choice
-      choice = gets.chomp
-      choice.to_i
+    def print_player_error
+      puts "That's not a valid choice, please try again."
     end
 
     def prompt_for_piece
@@ -24,19 +23,6 @@ class UserInterface
 
     def get_game_piece
       choice = gets.chomp
-    end
-
-    def prompt_for_player_type
-      puts "Please choose your player level : press e for easy and h for hard."
-    end
-
-    def get_player_choice
-      choice = gets.chomp
-      choice.upcase!
-    end
-
-    def print_player_error
-      puts "That's not a valid choice, please try again."
     end
 
     def welcome(player, game_piece)

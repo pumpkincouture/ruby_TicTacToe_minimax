@@ -3,7 +3,6 @@ require './lib/computer_player.rb'
 require './lib/human_player.rb'
 require './lib/user_interface.rb'
 require './lib/set_up.rb'
-require './lib/intel_computer_player.rb'
 require_relative 'mock_ui'
 
 RSpec.configure do |config|

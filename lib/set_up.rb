@@ -15,8 +15,8 @@ class SetUp
 	end
 
 	def set_up_game
-	  choose_board(get_board_choice)
-	  choose_player(get_player_choice)
+    @player = @player_factory.create_player
+    @board = Board.new(@ui, 3)
 	  get_game_piece(prompt_for_game_piece)
 	  create_human_player
 	end
@@ -24,15 +24,6 @@ class SetUp
 	def get_board_choice
 		@ui.prompt_for_board
 	  board_choice = @ui.get_board_choice
-	end
-
-	def choose_board(board_choice)
-	  if board_choice.to_i != 0
-			@board = Board.new(@ui, board_choice)
-	  else 
-			@ui.print_player_error
-	  	self.choose_board(get_board_choice)
-	  end
 	end
 
 	def prompt_for_game_piece
@@ -53,16 +44,7 @@ class SetUp
 		@human_player = HumanPlayer.new(@game_piece)
 	end
 
-	def get_player_choice
-		@ui.prompt_for_player_type
-		player_choice =	@ui.get_player_choice
-	end
-
 	def choose_player(player_choice)
 		@player = @player_factory.create_player(player_choice)
-		until @player
-			@ui.print_player_error
-			self.choose_player(get_player_choice)
-		end
 	end
 end
